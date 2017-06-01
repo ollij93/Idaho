@@ -4,15 +4,37 @@
     <Filter Include="Core">
       <UniqueIdentifier>{06837cd9-f986-42e0-9513-e93689d3b3d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{d61a030c-f948-46fb-a651-9194d7cf3105}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="Graphics\GraphicsSystem.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\D3DSystem.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\RenderSystem.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
-    <ClInclude Include="Core\assert.h">
+    <ClInclude Include="Graphics\GraphicsSystem.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Assert.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\D3DSystem.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\RenderSystem.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h" />
   </ItemGroup>
 </Project>

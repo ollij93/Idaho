@@ -1,19 +1,24 @@
 #pragma once
 
-class GameSystem {
-public:
-    static bool Create();
-    static void Destroy();
+// Includes...
+#include "Singleton.h"
 
+/*
+ * GameSystem
+ *   The main singleton class for controlling the game subsystems
+ */
+class GameSystem : public Singleton<GameSystem> {
+public:
     static bool Run();
 
 protected:
     GameSystem();
     ~GameSystem() {}
 
-private:
-    bool Init();
-    void Shutdown();
+protected:
+    virtual bool Init() override;
+    virtual void Shutdown() override;
 
-    static GameSystem* s_pxThis;
+private:
+    friend Singleton<GameSystem>;
 };

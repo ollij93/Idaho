@@ -1,6 +1,12 @@
 #pragma once
 
 #ifdef USE_ASSERT
+
+// Includes...
+#include <Windows.h>
+
+extern HWND gHWND;
+
 #define ASSERT(__cond,__hint) \
     do { \
         if(!(__cond)) \

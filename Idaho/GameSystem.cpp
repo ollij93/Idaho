@@ -1,38 +1,13 @@
 // Includes...
-#include "Core/assert.h"
 #include "GameSystem.h"
+#include "Core/Assert.h"
+#include "Graphics/GraphicsSystem.h"
 
 // Static variables...
-GameSystem* GameSystem::s_pxThis = nullptr;
+GameSystem* Singleton<GameSystem>::s_pxThis = nullptr;
 
 GameSystem::GameSystem()
 {
-}
-
-/*
- * Create : Singleton create method
- */
-bool
-GameSystem::Create()
-{
-    ASSERT(!s_pxThis, "GameSystem is already created.");
-    if (s_pxThis) { return false; }
-
-    s_pxThis = new GameSystem;
-    return s_pxThis->Init();
-}
-
-/*
- * Destroy : Singleton destroy method
- */
-void
-GameSystem::Destroy()
-{
-    if (!s_pxThis) { return; }
-
-    s_pxThis->Shutdown();
-    delete s_pxThis;
-    s_pxThis = nullptr;
 }
 
 /*
@@ -42,6 +17,7 @@ bool
 GameSystem::Run()
 {
     ASSERT(s_pxThis, "Attempting to run GameSystem before it is created.");
+    GraphicsSystem::Render();
     return true;
 }
 
@@ -51,6 +27,12 @@ GameSystem::Run()
 bool
 GameSystem::Init()
 {
+    bool bResult;
+
+    bResult = GraphicsSystem::Create();
+    ASSERT(bResult, "Failed to create the graphics system");
+    if (!bResult) { return false; }
+
     return true;
 }
 
@@ -60,5 +42,5 @@ GameSystem::Init()
 void
 GameSystem::Shutdown()
 {
-    return;
+    GraphicsSystem::Destroy();
 }

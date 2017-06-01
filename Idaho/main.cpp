@@ -3,15 +3,14 @@
 
 // Macro defines...
 #define APP_NAME "Idaho"
-#define USE_ASSERT
 
 // Internal includes...
 #include "Core/assert.h"
 #include "GameSystem.h"
 
 // Global Variables...
-HWND gHWND = nullptr;
-const bool gbFULLSCREEN = false;
+extern HWND gHWND = nullptr;
+extern const bool gbFULLSCREEN = false;
 
 /*
  * WndProc : Callback function for Windows messages
