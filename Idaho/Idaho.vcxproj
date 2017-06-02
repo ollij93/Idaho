@@ -117,6 +117,7 @@
     <ClCompile Include="Graphics\D3DSystem.cpp" />
     <ClCompile Include="Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="Graphics\RenderSystem.cpp" />
+    <ClCompile Include="Graphics\Shader\ColorShader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -125,7 +126,23 @@
     <ClInclude Include="Graphics\D3DSystem.h" />
     <ClInclude Include="Graphics\GraphicsSystem.h" />
     <ClInclude Include="Graphics\RenderSystem.h" />
+    <ClInclude Include="Graphics\Shader\ColorShader.h" />
+    <ClInclude Include="Graphics\Shader\Shader.h" />
     <ClInclude Include="Singleton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shader\VS\ColorVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,6 +7,15 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{d61a030c-f948-46fb-a651-9194d7cf3105}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Shader">
+      <UniqueIdentifier>{78ba1502-333f-451f-9444-aeb2b9d22951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader\PS">
+      <UniqueIdentifier>{1bbd7d77-05df-4b44-ac26-439841b00773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader\VS">
+      <UniqueIdentifier>{e5171f78-e478-427e-b982-30b057f16f30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -19,6 +28,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\RenderSystem.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader\ColorShader.cpp">
+      <Filter>Graphics\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,5 +48,19 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Graphics\Shader\Shader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader\ColorShader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">
+      <Filter>Graphics\Shader\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shader\VS\ColorVertexShader.hlsl">
+      <Filter>Graphics\Shader\VS</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
