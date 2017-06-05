@@ -5,6 +5,8 @@
 // Externs...
 extern HWND gHWND;
 extern const bool gbFULLSCREEN;
+extern u_int guSCREENWIDTH;
+extern u_int guSCREENHEIGHT;
 
 // Global Variables...
 const bool gbVSYNC = false;
@@ -93,6 +95,9 @@ D3DSystem::Init()
 
     D3D11_TEXTURE2D_DESC xDepthBufferDesc;
     ZeroMemory(&xDepthBufferDesc, sizeof(D3D11_TEXTURE2D_DESC));
+
+    D3D11_VIEWPORT xViewport;
+    ZeroMemory(&xViewport, sizeof(D3D11_VIEWPORT));
 
     // Create the D3D11 device and device context
     hResult = D3D11CreateDevice(NULL,
@@ -229,6 +234,15 @@ D3DSystem::Init()
 
     // Bind the render target view and depth stencil view
     m_pxDeviceContext->OMSetRenderTargets(1, &m_pxRenderTargetView, m_pxDepthStencilView);
+
+    // Setup the viewport for rendering
+    xViewport.Width = (float)uScreenWidth;
+    xViewport.Height = (float)uScreenHeight;
+    xViewport.MinDepth = 0.f;
+    xViewport.MaxDepth = 1.f;
+    xViewport.TopLeftX = 0.f;
+    xViewport.TopLeftY = 0.f;
+    m_pxDeviceContext->RSSetViewports(1, &xViewport);
 
     // Release the back buffer
     pxBackBuffer->Release();

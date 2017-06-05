@@ -7,8 +7,9 @@
 #endif
 
 // Link libraries ...
-#pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+#pragma comment(lib, "dxgi.lib")
 
 // Includes...
 #include "Singleton.h"
@@ -21,6 +22,9 @@ class D3DSystem : public Singleton<D3DSystem> {
 public:
     static void BeginScene();
     static void EndScene();
+
+    static ID3D11Device* GetDevice() { return (s_pxThis) ? s_pxThis->m_pxDevice : nullptr; }
+    static ID3D11DeviceContext* GetDeviceContext() { return (s_pxThis) ? s_pxThis->m_pxDeviceContext : nullptr; }
 
 protected:
     virtual bool Init() override;

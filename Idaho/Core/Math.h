@@ -2,6 +2,7 @@
 
 // Includes...
 #include <math.h>
+#include <DirectXMath.h>
 
 namespace Math {
     // Constants
@@ -20,7 +21,7 @@ public:
     Vector2(const Vector2<T>& xVector) : x(xVector.x), y(xVector.y) {}
     ~Vector2() {}
 
-    static inline const Vector2<T> ZeroVector() { return Vector2<T>() };
+    static inline const Vector2<T> ZeroVector() { return Vector2<T>(); }
 
     Vector2<T> operator +(const Vector2<T>& xVector) const { return Vector2<T>(x + xVector.x, y + xVector.y); }
     Vector2<T> operator -(const Vector2<T>& xVector) const { return Vector2<T>(x - xVector.x, y - xVector.y); }
@@ -33,11 +34,13 @@ template<typename T>
 class Vector3 {
 public:
     Vector3() : x((T)0), y((T)0), z((T)0) {}
-    Vector3(T _x, T _y, T _z) : x(_x), y(_y), y(_z) {}
+    Vector3(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
     Vector3(const Vector3<T>& xVector) : x(xVector.x), y(xVector.y), z(xVector.z) {}
     ~Vector3() {}
 
-    static inline const Vector3<T> ZeroVector() { return Vector3<T>() };
+    operator DirectX::XMVECTOR() const { return DirectX::XMVectorSet(x, y, z, 0); }
+
+    static inline const Vector3<T> ZeroVector() { return Vector3<T>(); }
 
     void operator +=(Vector3<T> xVector) { x += xVector.x; y += xVector.y; z += xVector.z; }
     void operator -=(Vector3<T> xVector) { x -= xVector.x; y -= xVector.y; z -= xVector.z; }
@@ -85,7 +88,7 @@ public:
     }
     ~Matrix3x3() {}
 
-    static inline const Matrix3x3 Identity() { return Matrix3x3() };
+    static inline const Matrix3x3 Identity() { return Matrix3x3(); }
 
     Matrix3x3
     operator*(const Matrix3x3& xMatrix) const
@@ -110,17 +113,17 @@ public:
     RotateLocalX(float fDeltaTheta)
     {
         Matrix3x3 xRotateMat = { 1.f, 0.f, 0.f,
-            0.f, cos(fDeltaTheta), -sin(fDeltaTheta),
-            0.f, sin(fDeltaTheta), cos(fDeltaTheta) };
+            0.f, cosf(fDeltaTheta), -sinf(fDeltaTheta),
+            0.f, sinf(fDeltaTheta), cosf(fDeltaTheta) };
         Matrix3x3 xResult = xRotateMat * (*this);
         (*this) = xResult;
     }
     void
     RotateWorldY(float fDeltaPhi)
     {
-        Matrix3x3 xRotateMat = { cos(fDeltaPhi), 0.f, sin(fDeltaPhi),
+        Matrix3x3 xRotateMat = { cosf(fDeltaPhi), 0.f, sinf(fDeltaPhi),
             0.f,  1.f, 0.f,
-            -sin(fDeltaPhi), 0.f, cos(fDeltaPhi) };
+            -sinf(fDeltaPhi), 0.f, cosf(fDeltaPhi) };
         Matrix3x3 xResult = (*this) * xRotateMat;
         (*this) = xResult;
     }

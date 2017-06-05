@@ -1,6 +1,9 @@
 // Includes...
 #include "RenderSystem.h"
+#include "Renderable.h"
 #include "Core/Assert.h"
+#include "Graphics/Shader/ColorShader.h"
+#include "Graphics/Shader/TextureShader.h"
 
 // Static Variables...
 RenderSystem* Singleton<RenderSystem>::s_pxThis = nullptr;
@@ -11,7 +14,15 @@ RenderSystem* Singleton<RenderSystem>::s_pxThis = nullptr;
 bool
 RenderSystem::Init()
 {
-    return true;
+    bool bResult;
+
+    bResult = ColorShader::Create();
+    if (!bResult) { return false; }
+
+    bResult = TextureShader::Create();
+    if (!bResult) { return false; }
+
+    return bResult;
 }
 
 /*
@@ -28,5 +39,13 @@ RenderSystem::Shutdown()
 bool
 RenderSystem::Render()
 {
-    return true;
+    bool bResult;
+
+    bResult = ColorShader::Render();
+    if (!bResult) { return false; }
+
+    bResult = TextureShader::Render();
+    if (!bResult) { return false; }
+
+    return bResult;
 }

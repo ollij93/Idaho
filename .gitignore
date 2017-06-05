@@ -50,6 +50,7 @@ artifacts/
 *.ilk
 *.meta
 *.obj
+!Idaho/Models/*.obj
 *.pch
 *.pdb
 *.pgc

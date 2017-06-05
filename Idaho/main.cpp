@@ -11,6 +11,10 @@
 // Global Variables...
 extern HWND gHWND = nullptr;
 extern const bool gbFULLSCREEN = false;
+extern u_int guSCREENWIDTH = 0;
+extern u_int guSCREENHEIGHT = 0;
+extern const float gfSCREENNEAR = 0.1f;
+extern const float gfSCREENDEPTH = 1000.f;
 
 /*
  * WndProc : Callback function for Windows messages
@@ -102,6 +106,10 @@ InitWindow(u_int& uScreenWidth,
     ShowWindow(gHWND, SW_SHOW);
     SetForegroundWindow(gHWND);
     SetFocus(gHWND);
+
+    // Set the global variables
+    guSCREENWIDTH = uScreenWidth;
+    guSCREENHEIGHT = uScreenHeight;
 }
 
 /*

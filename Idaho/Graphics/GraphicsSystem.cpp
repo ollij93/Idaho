@@ -2,6 +2,7 @@
 #include "GraphicsSystem.h"
 #include "D3DSystem.h"
 #include "RenderSystem.h"
+#include "TextureHandler.h"
 #include "Core/Assert.h"
 
 // Static Variables...
@@ -36,10 +37,10 @@ GraphicsSystem::Init()
     ASSERT(bResult, "Failed to create the render system.");
     if (!bResult) { return false; }
 
-    //// Create the texture handler
-    //bResult = TextureHandler::Create();
-    //ASSERT(bResult, "Failed to create the texture handler.");
-    //if (!bResult) { return false; }
+    // Create the texture handler
+    bResult = TextureHandler::Create();
+    ASSERT(bResult, "Failed to create the texture handler.");
+    if (!bResult) { return false; }
 
     return true;
 }
@@ -50,7 +51,7 @@ GraphicsSystem::Init()
 void
 GraphicsSystem::Shutdown()
 {
-    //TextureHandler::Destroy();
+    TextureHandler::Destroy();
     RenderSystem::Destroy();
     D3DSystem::Destroy();
 }

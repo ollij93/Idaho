@@ -24,7 +24,5 @@ protected:
     virtual bool Init() = 0;
     virtual void Shutdown() = 0;
 
-private:
     static T* s_pxThis;
-    friend T;
 };

@@ -7,6 +7,27 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{d61a030c-f948-46fb-a651-9194d7cf3105}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Shader">
+      <UniqueIdentifier>{78ba1502-333f-451f-9444-aeb2b9d22951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader\PS">
+      <UniqueIdentifier>{1bbd7d77-05df-4b44-ac26-439841b00773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader\VS">
+      <UniqueIdentifier>{e5171f78-e478-427e-b982-30b057f16f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{ae7405b3-4e8f-46f7-9e33-340627df6925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{67cfe858-466a-41e1-b5a1-ea014978a762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\DirectX">
+      <UniqueIdentifier>{9d4bf950-5492-4a6d-9d69-27913526fb7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\DirectX\DDSTextureLoader">
+      <UniqueIdentifier>{accd8067-420c-493d-86e4-064974283cca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -19,6 +40,33 @@
     </ClCompile>
     <ClCompile Include="Graphics\RenderSystem.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader\ColorShader.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderable.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Model.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Entity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Camera.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader\Shader.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader\TextureShader.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\TextureHandler.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.cpp">
+      <Filter>Component\DirectX\DDSTextureLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,5 +84,55 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Graphics\Shader\Shader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader\ColorShader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Types.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderable.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Model.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Camera.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader\TextureShader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\TextureHandler.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader\ShaderRegistry.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.h">
+      <Filter>Component\DirectX\DDSTextureLoader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">
+      <Filter>Graphics\Shader\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shader\VS\ColorVertexShader.hlsl">
+      <Filter>Graphics\Shader\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shader\VS\TextureVertexShader.hlsl">
+      <Filter>Graphics\Shader\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shader\PS\TexturePixelShader.hlsl">
+      <Filter>Graphics\Shader\PS</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
