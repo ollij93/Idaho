@@ -1,6 +1,6 @@
 // Buffers...
 Texture2D t2dTexture;
-SamplerState xSampleType;
+SamplerState xSamplerType;
 
 // Types...
 struct TexturePixelInputType
@@ -16,7 +16,7 @@ float4 main(TexturePixelInputType xInput) : SV_TARGET
 {
     float4 f4TextureColor;
 
-    f4TextureColor = t2dTexture.Sample(xSampleType, xInput.f2TexCoord);
+    f4TextureColor = t2dTexture.Sample(xSamplerType, xInput.f2TexCoord);
 
     return f4TextureColor;
 }

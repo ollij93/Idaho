@@ -37,7 +37,7 @@ protected:
     virtual bool Init() override;
     virtual void Shutdown() override;
 
-    bool SetShaderParameters(ID3D11DeviceContext* pxDeviceContext,
+    virtual bool SetShaderParameters(ID3D11DeviceContext* pxDeviceContext,
         const DirectX::XMMATRIX& xWorldMatrix,
         const DirectX::XMMATRIX& xViewMatrix,
         const DirectX::XMMATRIX& xProjectionMatrix,

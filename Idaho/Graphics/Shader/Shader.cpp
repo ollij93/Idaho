@@ -202,6 +202,9 @@ Shader<T>::RenderShader(u_int uIndexCount)
     pxDeviceContext->VSSetShader(m_pxVertexShader, NULL, 0);
     pxDeviceContext->PSSetShader(m_pxPixelShader, NULL, 0);
 
+    // Set the sampler state in the pixel shader.
+    pxDeviceContext->PSSetSamplers(0, 1, &m_pxSamplerState);
+
     // Render the triangle.
     pxDeviceContext->DrawIndexed(uIndexCount, 0, 0);
 }
@@ -337,7 +340,7 @@ Shader<T>::CreateVertexInputLayout(ID3D10Blob* pxVertexShaderBuffer)
 
     axPolygonLayout[1].SemanticName = "TEXCOORD";
     axPolygonLayout[1].SemanticIndex = 0;
-    axPolygonLayout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    axPolygonLayout[1].Format = DXGI_FORMAT_R32G32_FLOAT;
     axPolygonLayout[1].InputSlot = 0;
     axPolygonLayout[1].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
     axPolygonLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
@@ -345,7 +348,7 @@ Shader<T>::CreateVertexInputLayout(ID3D10Blob* pxVertexShaderBuffer)
 
     axPolygonLayout[2].SemanticName = "NORMAL";
     axPolygonLayout[2].SemanticIndex = 0;
-    axPolygonLayout[2].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    axPolygonLayout[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
     axPolygonLayout[2].InputSlot = 0;
     axPolygonLayout[2].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
     axPolygonLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
