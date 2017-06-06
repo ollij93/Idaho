@@ -116,6 +116,7 @@
     <ClCompile Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.cpp" />
     <ClCompile Include="Entity\Camera.cpp" />
     <ClCompile Include="Entity\Entity.cpp" />
+    <ClCompile Include="Entity\Light.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="Graphics\D3DSystem.cpp" />
     <ClCompile Include="Graphics\GraphicsSystem.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Graphics\Renderable.cpp" />
     <ClCompile Include="Graphics\RenderSystem.cpp" />
     <ClCompile Include="Graphics\Shader\ColorShader.cpp" />
+    <ClCompile Include="Graphics\Shader\LightShader.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
     <ClCompile Include="Graphics\Shader\TextureShader.cpp" />
     <ClCompile Include="Graphics\TextureHandler.cpp" />
@@ -135,6 +137,7 @@
     <ClInclude Include="Core\Types.h" />
     <ClInclude Include="Entity\Camera.h" />
     <ClInclude Include="Entity\Entity.h" />
+    <ClInclude Include="Entity\Light.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="Graphics\D3DSystem.h" />
     <ClInclude Include="Graphics\GraphicsSystem.h" />
@@ -142,6 +145,7 @@
     <ClInclude Include="Graphics\Renderable.h" />
     <ClInclude Include="Graphics\RenderSystem.h" />
     <ClInclude Include="Graphics\Shader\ColorShader.h" />
+    <ClInclude Include="Graphics\Shader\LightShader.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
     <ClInclude Include="Graphics\Shader\ShaderRegistry.h" />
     <ClInclude Include="Graphics\Shader\TextureShader.h" />
@@ -155,6 +159,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
+    <FxCompile Include="Graphics\Shader\PS\LightPixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="Graphics\Shader\PS\TexturePixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -166,6 +173,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shader\VS\LightVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Graphics\Shader\VS\TextureVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>

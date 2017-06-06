@@ -1,8 +1,8 @@
 // Includes...
 #include "RenderSystem.h"
-#include "Renderable.h"
 #include "Core/Assert.h"
 #include "Graphics/Shader/ColorShader.h"
+#include "Graphics/Shader/LightShader.h"
 #include "Graphics/Shader/TextureShader.h"
 
 // Static Variables...
@@ -20,6 +20,9 @@ RenderSystem::Init()
     if (!bResult) { return false; }
 
     bResult = TextureShader::Create();
+    if (!bResult) { return false; }
+
+    bResult = LightShader::Create();
     if (!bResult) { return false; }
 
     return bResult;
@@ -45,6 +48,9 @@ RenderSystem::Render()
     if (!bResult) { return false; }
 
     bResult = TextureShader::Render();
+    if (!bResult) { return false; }
+
+    bResult = LightShader::Render();
     if (!bResult) { return false; }
 
     return bResult;
