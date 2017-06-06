@@ -68,6 +68,12 @@
     <ClCompile Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.cpp">
       <Filter>Component\DirectX\DDSTextureLoader</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Shader\LightShader.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Light.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -120,6 +126,12 @@
     <ClInclude Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.h">
       <Filter>Component\DirectX\DDSTextureLoader</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Shader\LightShader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Light.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">
@@ -132,6 +144,12 @@
       <Filter>Graphics\Shader\VS</Filter>
     </FxCompile>
     <FxCompile Include="Graphics\Shader\PS\TexturePixelShader.hlsl">
+      <Filter>Graphics\Shader\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shader\VS\LightVertexShader.hlsl">
+      <Filter>Graphics\Shader\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shader\PS\LightPixelShader.hlsl">
       <Filter>Graphics\Shader\PS</Filter>
     </FxCompile>
   </ItemGroup>

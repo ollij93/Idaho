@@ -6,7 +6,7 @@
 #include "Model.h"
 #include "Core/Assert.h"
 #include "Core/Math.h"
-#include "Graphics/Shader/TextureShader.h"
+#include "Graphics/Shader/LightShader.h"
 
 #define MAX_MODEL_FILENAME_SIZE 256
 #define MAX_MODEL_LINE_LENGTH 1024
@@ -14,7 +14,7 @@
 Model::Model()
 : m_uModelHash(uHASH_UNSET)
 {
-    TextureShader::AddToRenderList(this);
+    LightShader::AddToRenderList(this);
 }
 
 bool
