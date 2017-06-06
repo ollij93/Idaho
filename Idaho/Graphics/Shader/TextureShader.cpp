@@ -1,6 +1,3 @@
-// External Includes...
-#include <list>
-
 // Includes...
 #include "TextureShader.h"
 #include "Graphics/Renderable.h"

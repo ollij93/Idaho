@@ -81,7 +81,7 @@ public:
         float _xx, float _xy, float _xz,
         float _yx, float _yy, float _yz,
         float _zx, float _zy, float _zz)
-        : xx(_xx), xy(_xy), xz(_xx)
+        : xx(_xx), xy(_xy), xz(_xz)
         , yx(_yx), yy(_yy), yz(_yz)
         , zx(_zx), zy(_zy), zz(_zz)
     {
@@ -112,9 +112,9 @@ public:
     void
     RotateLocalX(float fDeltaTheta)
     {
-        Matrix3x3 xRotateMat = { 1.f, 0.f, 0.f,
+        Matrix3x3 xRotateMat(1.f, 0.f, 0.f,
             0.f, cosf(fDeltaTheta), -sinf(fDeltaTheta),
-            0.f, sinf(fDeltaTheta), cosf(fDeltaTheta) };
+            0.f, sinf(fDeltaTheta), cosf(fDeltaTheta) );
         Matrix3x3 xResult = xRotateMat * (*this);
         (*this) = xResult;
     }
@@ -127,6 +127,10 @@ public:
         Matrix3x3 xResult = (*this) * xRotateMat;
         (*this) = xResult;
     }
+
+    Vector3<float> Column1() const { return Vector3<float>(xx, yx, zx); }
+    Vector3<float> Column2() const { return Vector3<float>(xy, yy, zy); }
+    Vector3<float> Column3() const { return Vector3<float>(xz, yz, zz); }
 
     float xx, xy, xz;
     float yx, yy, yz;
