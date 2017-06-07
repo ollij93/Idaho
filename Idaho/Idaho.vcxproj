@@ -114,6 +114,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.cpp" />
+    <ClCompile Include="..\TinyXML\tinyxml2.cpp" />
     <ClCompile Include="Entity\Camera.cpp" />
     <ClCompile Include="Entity\Entity.cpp" />
     <ClCompile Include="Entity\Light.cpp" />
@@ -129,9 +130,12 @@
     <ClCompile Include="Graphics\Shader\TextureShader.cpp" />
     <ClCompile Include="Graphics\TextureHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Specification\Specification.cpp" />
+    <ClCompile Include="Specification\SpecificationSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.h" />
+    <ClInclude Include="..\TinyXML\tinyxml2.h" />
     <ClInclude Include="Core\Assert.h" />
     <ClInclude Include="Core\Math.h" />
     <ClInclude Include="Core\Types.h" />
@@ -151,6 +155,8 @@
     <ClInclude Include="Graphics\Shader\TextureShader.h" />
     <ClInclude Include="Graphics\TextureHandler.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Specification\Specification.h" />
+    <ClInclude Include="Specification\SpecificationSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">

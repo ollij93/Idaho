@@ -16,7 +16,7 @@ bool
 TextureHandler::Init()
 {
     // Find all textures in the directory and load them in.
-    wchar_t awcFilename[256];
+    wchar_t awcFilename[MAX_TEXTURE_FILENAME_SIZE];
     errno_t iErrno;
     WIN32_FIND_DATAW xFindData;
     TextureHandle xHandle;
@@ -30,7 +30,7 @@ TextureHandler::Init()
             if (!iErrno) {
                 iErrno = wcscat_s(awcFilename, MAX_TEXTURE_FILENAME_SIZE, xFindData.cFileName);
             }
-            ASSERT(!iErrno, "Failed to copy model filename to buffer. Filename too long?");
+            ASSERT(!iErrno, "Failed to copy texture filename to buffer. Filename too long?");
             if (iErrno) { return false; }
 
             HRESULT hResult = DirectX::CreateDDSTextureFromFile(D3DSystem::GetDevice(),
