@@ -28,6 +28,12 @@
     <Filter Include="Component\DirectX\DDSTextureLoader">
       <UniqueIdentifier>{accd8067-420c-493d-86e4-064974283cca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Specification">
+      <UniqueIdentifier>{0dce5535-d542-4e89-a893-072bd108504c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\TinyXML">
+      <UniqueIdentifier>{c4b4525c-3d96-4131-8b89-ec4695c56ccd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -73,6 +79,15 @@
     </ClCompile>
     <ClCompile Include="Entity\Light.cpp">
       <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Specification\SpecificationSystem.cpp">
+      <Filter>Specification</Filter>
+    </ClCompile>
+    <ClCompile Include="Specification\Specification.cpp">
+      <Filter>Specification</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TinyXML\tinyxml2.cpp">
+      <Filter>Component\TinyXML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +146,15 @@
     </ClInclude>
     <ClInclude Include="Entity\Light.h">
       <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Specification\SpecificationSystem.h">
+      <Filter>Specification</Filter>
+    </ClInclude>
+    <ClInclude Include="Specification\Specification.h">
+      <Filter>Specification</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TinyXML\tinyxml2.h">
+      <Filter>Component\TinyXML</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
