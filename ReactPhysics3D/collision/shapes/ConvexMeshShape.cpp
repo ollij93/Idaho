@@ -89,7 +89,7 @@ ConvexMeshShape::ConvexMeshShape(TriangleVertexArray* triangleVertexArray, bool 
         else if (vertexType == TriangleVertexArray::VERTEX_DOUBLE_TYPE) {
             const double* vertices = (double*)(verticesStart + v * vertexStride);
 
-            Vector3 vertex(vertices[0], vertices[1], vertices[2] );
+            Vector3 vertex((decimal)vertices[0], (decimal)vertices[1], (decimal)vertices[2]);
             vertex = vertex * mScaling;
             mVertices.push_back(vertex);
         }

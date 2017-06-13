@@ -43,7 +43,7 @@ HeightFieldShape::HeightFieldShape(int nbGridColumns, int nbGridRows, decimal mi
                                    const void* heightFieldData, HeightDataType dataType, int upAxis,
                                    decimal integerHeightScale)
                  : ConcaveShape(HEIGHTFIELD), mNbColumns(nbGridColumns), mNbRows(nbGridRows),
-                   mWidth(nbGridColumns - 1), mLength(nbGridRows - 1), mMinHeight(minHeight),
+                   mWidth((decimal)(nbGridColumns - 1)), mLength((decimal)(nbGridRows - 1)), mMinHeight(minHeight),
                    mMaxHeight(maxHeight), mUpAxis(upAxis), mIntegerHeightScale(integerHeightScale),
                    mHeightDataType(dataType) {
 

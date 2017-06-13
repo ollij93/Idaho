@@ -158,9 +158,9 @@ void ConcaveVsConvexAlgorithm::processSmoothMeshCollision(OverlappingPair* overl
                                                 info.triangleVertices[2],
                                                 contactPoint, u, v, w);
         int nbZeros = 0;
-        bool isUZero = approxEqual(u, 0, 0.0001);
-        bool isVZero = approxEqual(v, 0, 0.0001);
-        bool isWZero = approxEqual(w, 0, 0.0001);
+        bool isUZero = approxEqual(u, 0.f, 0.0001f);
+        bool isVZero = approxEqual(v, 0.f, 0.0001f);
+        bool isWZero = approxEqual(w, 0.f, 0.0001f);
         if (isUZero) nbZeros++;
         if (isVZero) nbZeros++;
         if (isWZero) nbZeros++;

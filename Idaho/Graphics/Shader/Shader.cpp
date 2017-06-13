@@ -6,7 +6,7 @@
 // Includes...
 #include "Shader.h"
 #include "Core/Assert.h"
-#include "Entity/Camera.h"
+#include "Objects/Camera.h"
 #include "Graphics/D3DSystem.h"
 #include "Graphics/Renderable.h"
 

@@ -29,12 +29,13 @@ public:
 
     virtual bool Init();
     virtual void Shutdown();
-    void Render();
+    virtual void Render();
 
     // Getters & Setters...
-    u_int GetIndexCount() const { return m_uIndexCount; }
+    virtual u_int GetIndexCount() const { return m_uIndexCount; }
     virtual DirectX::XMMATRIX GetWorldMatrix() const { return DirectX::XMMatrixIdentity(); }
     virtual ID3D11ShaderResourceView* GetTexture() const { return TextureHandler::GetTextureByHash(m_uTextureHash); }
+    virtual void SetTextureHash(Hash uTextureHash) { m_uTextureHash = uTextureHash; }
 
 protected:
     u_int m_uIndexCount;

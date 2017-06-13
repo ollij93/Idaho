@@ -134,7 +134,7 @@ bool AABB::testRayIntersect(const Ray& ray) const {
 
     // Add in an epsilon term to counteract arithmetic errors when segment is
     // (near) parallel to a coordinate axis (see text for detail)
-    const decimal epsilon = 0.00001;
+    const decimal epsilon = 0.00001f;
     adx += epsilon;
     ady += epsilon;
     adz += epsilon;

@@ -14,7 +14,6 @@
 Model::Model()
 : m_uModelHash(uHASH_UNSET)
 {
-    LightShader::AddToRenderList(this);
 }
 
 bool

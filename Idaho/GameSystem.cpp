@@ -2,6 +2,7 @@
 #include "GameSystem.h"
 #include "Core/Assert.h"
 #include "Graphics/GraphicsSystem.h"
+#include "Specification/SpecificationSystem.h"
 
 // Static variables...
 GameSystem* Singleton<GameSystem>::s_pxThis = nullptr;
@@ -29,6 +30,10 @@ GameSystem::Init()
 {
     bool bResult;
 
+    bResult = SpecificationSystem::Create();
+    ASSERT(bResult, "Failed to create the Specification system");
+    if (!bResult) { return false; }
+
     bResult = GraphicsSystem::Create();
     ASSERT(bResult, "Failed to create the graphics system");
     if (!bResult) { return false; }
@@ -43,4 +48,5 @@ void
 GameSystem::Shutdown()
 {
     GraphicsSystem::Destroy();
+    SpecificationSystem::Destroy();
 }

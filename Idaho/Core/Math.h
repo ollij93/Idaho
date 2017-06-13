@@ -3,6 +3,7 @@
 // Includes...
 #include <math.h>
 #include <DirectXMath.h>
+#include "ReactPhysics3D/reactphysics3d.h"
 
 namespace Math {
     // Constants
@@ -36,9 +37,11 @@ public:
     Vector3() : x((T)0), y((T)0), z((T)0) {}
     Vector3(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
     Vector3(const Vector3<T>& xVector) : x(xVector.x), y(xVector.y), z(xVector.z) {}
+    Vector3(const rp3d::Vector3& xVector) : x(xVector.x), y(xVector.y), z(xVector.z) {}
     ~Vector3() {}
 
     operator DirectX::XMVECTOR() const { return DirectX::XMVectorSet(x, y, z, 0); }
+    operator rp3d::Vector3() const { return rp3d::Vector3(x, y, z); }
 
     static inline const Vector3<T> ZeroVector() { return Vector3<T>(); }
 
@@ -86,7 +89,15 @@ public:
         , zx(_zx), zy(_zy), zz(_zz)
     {
     }
+    Matrix3x3(const rp3d::Matrix3x3& xOther)
+        : xx(xOther[0][0]), xy(xOther[0][1]), xz(xOther[0][2])
+        , yx(xOther[1][0]), yy(xOther[1][1]), yz(xOther[1][2])
+        , zx(xOther[2][0]), zy(xOther[2][1]), zz(xOther[2][2])
+    {
+    }
     ~Matrix3x3() {}
+
+    operator rp3d::Matrix3x3() const { return rp3d::Matrix3x3(xx, xy, xz, yx, yy, yz, zx, zy, zz); }
 
     static inline const Matrix3x3 Identity() { return Matrix3x3(); }
 

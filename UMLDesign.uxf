@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>440</x>
-      <y>50</y>
+      <y>0</y>
       <w>160</w>
       <h>100</h>
     </coordinates>
@@ -22,7 +22,7 @@ Destroy()
     <id>UMLClass</id>
     <coordinates>
       <x>470</x>
-      <y>210</y>
+      <y>160</y>
       <w>260</w>
       <h>170</h>
     </coordinates>
@@ -45,7 +45,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>510</x>
-      <y>140</y>
+      <y>90</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -56,7 +56,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>510</x>
-      <y>370</y>
+      <y>320</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -67,7 +67,7 @@ RemoveFromRenderList(Renderable*)
     <id>UMLClass</id>
     <coordinates>
       <x>630</x>
-      <y>530</y>
+      <y>480</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -79,7 +79,7 @@ RemoveFromRenderList(Renderable*)
     <id>UMLClass</id>
     <coordinates>
       <x>320</x>
-      <y>350</y>
+      <y>300</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -90,7 +90,7 @@ RemoveFromRenderList(Renderable*)
     <id>UMLClass</id>
     <coordinates>
       <x>160</x>
-      <y>350</y>
+      <y>300</y>
       <w>120</w>
       <h>210</h>
     </coordinates>
@@ -101,7 +101,7 @@ RemoveFromRenderList(Renderable*)
     <id>UMLClass</id>
     <coordinates>
       <x>320</x>
-      <y>410</y>
+      <y>360</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -113,7 +113,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>140</y>
+      <y>90</y>
       <w>130</w>
       <h>300</h>
     </coordinates>
@@ -124,7 +124,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>210</x>
-      <y>140</y>
+      <y>90</y>
       <w>330</w>
       <h>230</h>
     </coordinates>
@@ -135,7 +135,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>140</y>
+      <y>90</y>
       <w>130</w>
       <h>240</h>
     </coordinates>
@@ -146,7 +146,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>270</x>
-      <y>410</y>
+      <y>360</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -157,7 +157,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>270</x>
-      <y>350</y>
+      <y>300</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -168,7 +168,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>420</y>
+      <y>370</y>
       <w>80</w>
       <h>30</h>
     </coordinates>
@@ -179,7 +179,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>670</x>
-      <y>370</y>
+      <y>320</y>
       <w>30</w>
       <h>180</h>
     </coordinates>
@@ -190,7 +190,7 @@ RemoveFromRenderList(Renderable*)
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>350</y>
+      <y>300</y>
       <w>120</w>
       <h>400</h>
     </coordinates>
@@ -201,7 +201,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>50</x>
-      <y>140</y>
+      <y>90</y>
       <w>490</w>
       <h>230</h>
     </coordinates>
@@ -212,7 +212,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>110</x>
-      <y>360</y>
+      <y>310</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -222,20 +222,20 @@ RemoveFromRenderList(Renderable*)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>390</y>
+      <x>780</x>
+      <y>480</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>/Entity/
+    <panel_attributes>/Object/
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>460</y>
+      <x>960</x>
+      <y>550</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -245,30 +245,30 @@ RemoveFromRenderList(Renderable*)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>410</y>
-      <w>30</w>
+      <x>820</x>
+      <y>500</y>
+      <w>210</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;190.0;30.0;190.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>700</x>
-      <y>370</y>
-      <w>80</w>
-      <h>120</h>
+      <x>720</x>
+      <y>300</y>
+      <w>270</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>60.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>250.0;250.0;250.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>600</y>
+      <x>570</x>
+      <y>550</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -278,19 +278,19 @@ RemoveFromRenderList(Renderable*)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>550</y>
-      <w>30</w>
+      <x>610</x>
+      <y>500</y>
+      <w>90</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>70.0;10.0;70.0;30.0;10.0;30.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>320</x>
-      <y>530</y>
+      <y>480</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -301,7 +301,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>270</x>
-      <y>530</y>
+      <y>480</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -312,7 +312,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>540</y>
+      <y>490</y>
       <w>240</w>
       <h>30</h>
     </coordinates>
@@ -323,7 +323,7 @@ RemoveFromRenderList(Renderable*)
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>140</y>
+      <y>90</y>
       <w>130</w>
       <h>420</h>
     </coordinates>
@@ -334,7 +334,7 @@ RemoveFromRenderList(Renderable*)
     <id>UMLClass</id>
     <coordinates>
       <x>470</x>
-      <y>410</y>
+      <y>360</y>
       <w>140</w>
       <h>100</h>
     </coordinates>
@@ -345,5 +345,127 @@ RemoveFromRenderList(Renderable*)
 ColorShader
 TextureShader</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>550</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Light
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>500</y>
+      <w>330</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;310.0;30.0;310.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>300</y>
+      <w>390</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>370.0;250.0;370.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>500</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;80.0;30.0;80.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>690</x>
+      <y>550</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/RenderableObject/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>500</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;80.0;30.0;10.0;30.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>550</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/Entity/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>500</y>
+      <w>90</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;70.0;30.0;70.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>570</y>
+      <w>90</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;70.0;30.0;10.0;30.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>620</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/RenderableEntity/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>570</y>
+      <w>90</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;70.0;30.0;70.0;50.0</additional_attributes>
   </element>
 </diagram>

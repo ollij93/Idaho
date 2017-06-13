@@ -13,7 +13,7 @@ T
 Specification::GetValue(Hash uParamHash, T tDefaultValue) const
 {
     const SpecificationParameter* pxParam = GetParameterFromHash(uParamHash);
-    if (pxParam && pxParam->m_eType == PARAM_TYPE_HASH) {
+    if (pxParam) {
         return (T)pxParam->m_UValue;
     } else {
         return tDefaultValue;
