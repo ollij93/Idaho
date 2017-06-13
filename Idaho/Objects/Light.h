@@ -1,19 +1,22 @@
 #pragma once
 
 // Includes...
-#include "Entity.h"
+#include "Object.h"
 #include "Core/Types.h"
 
-class Light : public Entity {
+class Light : public Object {
 public:
-    Light()
-        : PARENT()
+    Light(rp3d::CollisionWorld &xWorld, u_int uGUID)
+        : PARENT(xWorld, uGUID)
         , m_xDiffuseColor()
         , m_xAmbientColor()
     {
     }
     ~Light() {}
 
+    // Overrides...
+    virtual void InitFromSpecification(const Specification* pxSpecification) override {}
+    
     // Getters & Setters...
     Color GetDiffuseColor() const { return m_xDiffuseColor; }
     void SetDiffuseColor(Color xColor) { m_xDiffuseColor = xColor; }
@@ -31,6 +34,6 @@ private:
     // Statics...
     static Light* s_pxActive;
 
-    typedef Entity PARENT;
+    typedef Object PARENT;
 };
 

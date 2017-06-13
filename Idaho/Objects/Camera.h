@@ -4,13 +4,14 @@
 #include <DirectXMath.h>
 
 // Includes...
-#include "Entity.h"
+#include "Object.h"
 
 __declspec(align(16))
-class Camera : public Entity {
+class Camera : public Object {
 public:
-    Camera()
-        : m_xViewMatrix()
+    Camera(rp3d::CollisionWorld &xWorld, u_int uGUID)
+        : PARENT(xWorld, uGUID)
+        , m_xViewMatrix()
         , m_xProjectionMatrix()
         , m_fFieldOfView(Math::PI / 3.f)
     {
@@ -35,5 +36,5 @@ private:
     // Statics...
     static Camera* s_pxActive;
 
-    typedef Entity PARENT;
+    typedef Object PARENT;
 };

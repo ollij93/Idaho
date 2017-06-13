@@ -21,4 +21,6 @@ protected:
 private:
     void SpecificationSystem::LoadSpecsFromFile(const char* pszFilename);
     std::vector<Specification*> m_vxSpecifications;
+
+    friend Singleton<SpecificationSystem>;
 };

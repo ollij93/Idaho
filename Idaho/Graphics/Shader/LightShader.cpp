@@ -1,7 +1,7 @@
 // Includes...
 #include "LightShader.h"
 #include "Core/Assert.h"
-#include "Entity/Light.h"
+#include "Objects/Light.h"
 #include "Graphics/D3DSystem.h"
 #include "Graphics/Renderable.h"
 

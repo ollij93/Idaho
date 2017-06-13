@@ -173,8 +173,8 @@ short int ContactManifoldSet::computeCubemapNormalId(const Vector3& normal) cons
         v = normalScaled.y;
     }
 
-    int indexU = floor(((u + 1)/2) * CONTACT_CUBEMAP_FACE_NB_SUBDIVISIONS);
-    int indexV = floor(((v + 1)/2) * CONTACT_CUBEMAP_FACE_NB_SUBDIVISIONS);
+    int indexU = (int)floor(((u + 1)/2) * CONTACT_CUBEMAP_FACE_NB_SUBDIVISIONS);
+    int indexV = (int)floor(((v + 1)/2) * CONTACT_CUBEMAP_FACE_NB_SUBDIVISIONS);
     if (indexU == CONTACT_CUBEMAP_FACE_NB_SUBDIVISIONS) indexU--;
     if (indexV == CONTACT_CUBEMAP_FACE_NB_SUBDIVISIONS) indexV--;
 
