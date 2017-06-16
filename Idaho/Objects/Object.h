@@ -6,6 +6,7 @@
 // Includes...
 #include "Core/Math.h"
 #include "Core/Types.h"
+#include "Graphics/Renderable.h"
 #include "Specification/Specification.h"
 
 enum ColliderType {
@@ -24,6 +25,7 @@ class Object {
 public:
     Object(rp3d::CollisionWorld &xWorld, u_int uGUID)
         : m_xCollisionbody(rp3d::Transform::identity(), xWorld, uGUID)
+        , m_pxCollisionWorld(&xWorld)
         , m_uGUID(uGUID)
     {
     }
@@ -51,6 +53,28 @@ public:
 
 protected:
     rp3d::CollisionBody m_xCollisionbody;
+    rp3d::CollisionWorld* m_pxCollisionWorld;
     u_int m_uGUID;
     std::list<rp3d::CollisionShape*> m_lpxCollisionShapes;
+};
+
+// Abstract class to handle the multiple inheritance of Object and Renderable
+class RenderableObject : public Object, public Renderable {
+public:
+    RenderableObject::RenderableObject(rp3d::CollisionWorld &xWorld, u_int uGUID)
+        : Object(xWorld, uGUID)
+        , Renderable()
+    {
+    }
+
+    RenderableObject::~RenderableObject() {}
+
+    // Overrides...
+    virtual DirectX::XMMATRIX RenderableObject::GetWorldMatrix() const
+    {
+        DirectX::XMMATRIX xOri = GetOrientation();
+        const Vector3<float> xPos = GetPosition();
+        DirectX::XMMATRIX xWorldMatrix = DirectX::XMMatrixTranslation(xPos.x, xPos.y, xPos.z);
+        return DirectX::XMMatrixMultiply(xOri, xWorldMatrix);
+    }
 };
