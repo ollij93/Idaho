@@ -99,12 +99,6 @@
     <ClCompile Include="Objects\Entity\Entity.cpp">
       <Filter>Objects\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\RenderableObject.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Entity\RenderableEntity.cpp">
-      <Filter>Objects\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\ReactPhysics3D\memory\MemoryAllocator.cpp">
       <Filter>Component\ReactPhysics3D</Filter>
     </ClCompile>
@@ -279,7 +273,12 @@
     <ClCompile Include="..\ReactPhysics3D\body\RigidBody.cpp">
       <Filter>Component\ReactPhysics3D</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\StaticObject.cpp" />
+    <ClCompile Include="Objects\StaticObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Entity\ObjectController.cpp">
+      <Filter>Objects\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -349,12 +348,6 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Entity\Entity.h">
-      <Filter>Objects\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\RenderableObject.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Entity\RenderableEntity.h">
       <Filter>Objects\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\ReactPhysics3D\reactphysics3d.h">
@@ -555,7 +548,12 @@
     <ClInclude Include="..\ReactPhysics3D\body\RigidBody.h">
       <Filter>Component\ReactPhysics3D</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\StaticObject.h" />
+    <ClInclude Include="Objects\StaticObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Entity\ObjectController.h">
+      <Filter>Objects\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">

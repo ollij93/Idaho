@@ -120,13 +120,13 @@ Model::Init()
                 xTriFace.iTex1 = vxFaceNodes[0].y;
                 xTriFace.iNormal1 = vxFaceNodes[0].z;
 
-                xTriFace.iVertex2 = vxFaceNodes[2 + uIndex].x;
-                xTriFace.iTex2 = vxFaceNodes[2 + uIndex].y;
-                xTriFace.iNormal2 = vxFaceNodes[2 + uIndex].z;
+                xTriFace.iVertex2 = vxFaceNodes[1 + uIndex].x;
+                xTriFace.iTex2 = vxFaceNodes[1 + uIndex].y;
+                xTriFace.iNormal2 = vxFaceNodes[1 + uIndex].z;
 
-                xTriFace.iVertex3 = vxFaceNodes[1 + uIndex].x;
-                xTriFace.iTex3 = vxFaceNodes[1 + uIndex].y;
-                xTriFace.iNormal3 = vxFaceNodes[1 + uIndex].z;
+                xTriFace.iVertex3 = vxFaceNodes[2 + uIndex].x;
+                xTriFace.iTex3 = vxFaceNodes[2 + uIndex].y;
+                xTriFace.iNormal3 = vxFaceNodes[2 + uIndex].z;
 
                 vxFaces.push_back(xTriFace);
             }

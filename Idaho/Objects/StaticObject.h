@@ -1,15 +1,14 @@
 #pragma once
 
 // Includes...
-#include "RenderableObject.h"
+#include "Object.h"
 #include "Graphics/Model.h"
 #include "Graphics/Shader/LightShader.h"
 
 class StaticObject : public RenderableObject {
 public:
     StaticObject(rp3d::CollisionWorld &xWorld, u_int uGUID)
-        : Object(xWorld, uGUID)
-        , RenderableObject(xWorld, uGUID)
+        : RenderableObject(xWorld, uGUID)
         , m_xModel()
     {
         LightShader::AddToRenderList(this);

@@ -16,13 +16,13 @@ Entity::~Entity()
 }
 
 void
-Entity::ProcessUpdates()
+Entity::ProcessUpdates(float fTimestep)
 {
     std::list<Entity*>::const_iterator xIter;
     for (xIter = s_lpxEntityList.begin(); xIter != s_lpxEntityList.end(); ++xIter) {
         Entity* pxEntity = *xIter;
         if (pxEntity) {
-            pxEntity->Update();
+            pxEntity->Update(fTimestep);
         }
     }
 }

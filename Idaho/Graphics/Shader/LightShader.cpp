@@ -81,7 +81,7 @@ LightShader::SetShaderParameters(ID3D11DeviceContext* pxDeviceContext,
 
     pxDataPtr->xDiffuseColor = pxLight->GetDiffuseColor();
     pxDataPtr->xAmbientColor = pxLight->GetAmbientColor();
-    pxDataPtr->xLightDirection = pxLight->GetOrientation().Column3();
+    pxDataPtr->xLightDirection = pxLight->GetOrientation().Column(2);
     pxDataPtr->fPadding = 0.f;
 
     pxDeviceContext->Unmap(m_pxLightBuffer, 0);

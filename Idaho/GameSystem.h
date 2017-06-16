@@ -1,5 +1,8 @@
 #pragma once
 
+// External Includes...
+#include <ctime>
+
 // Includes...
 #include "Singleton.h"
 
@@ -20,5 +23,6 @@ protected:
     virtual void Shutdown() override;
 
 private:
+    clock_t m_lUpdateTime;
     friend Singleton<GameSystem>;
 };

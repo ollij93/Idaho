@@ -8,6 +8,11 @@
 #include "Core/assert.h"
 #include "GameSystem.h"
 
+#include "Objects/Camera.h"
+#include "Objects/Light.h"
+#include "Objects/StaticObject.h"
+#include "Objects/Entity/ObjectController.h"
+
 // Global Variables...
 extern HWND gHWND = nullptr;
 extern const bool gbFULLSCREEN = false;
@@ -15,26 +20,6 @@ extern u_int guSCREENWIDTH = 0;
 extern u_int guSCREENHEIGHT = 0;
 extern const float gfSCREENNEAR = 0.1f;
 extern const float gfSCREENDEPTH = 1000.f;
-
-/*
- * WndProc : Callback function for Windows messages
- */
-LRESULT CALLBACK
-WndProc(HWND gHWND, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-    switch (uMsg) {
-        // Handle the window specific messages
-        case WM_DESTROY:
-        case WM_CLOSE:
-        {
-            PostQuitMessage(0);
-            return 0;
-        }
-        // Default to let windows handle the message
-        default:
-            return DefWindowProc(gHWND, uMsg, wParam, lParam);
-    }
-}
 
 /*
  * InitWindow : Create the Windows objects and initialize the window
@@ -51,7 +36,7 @@ InitWindow(u_int& uScreenWidth,
 
     // Setup the windows class with default settings.
     wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-    wc.lpfnWndProc = WndProc;
+    wc.lpfnWndProc = InputSystem::HandleWindowsMessage;
     wc.hInstance = GetModuleHandle(NULL);
     wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
     wc.lpszMenuName = nullptr;
@@ -151,6 +136,36 @@ WinMain(HINSTANCE hInstance,
     // Create the game system
     bResult = GameSystem::Create();
     ASSERT(bResult, "Failed to create GameSystem");
+
+    rp3d::CollisionWorld xWorld;
+
+    Camera xCamera(xWorld, 0);
+    xCamera.SetPosition(-1.f, 1.f, -5.f);
+    Camera::SetActive(&xCamera);
+
+    Matrix3x3 xOri;
+    xOri.RotateLocalX(Math::PI * 70.f / 180.f);
+    xOri.RotateWorldY(Math::PI * 10.f / 180.f);
+
+    Light xLight(xWorld, 1);
+    xLight.SetOrientation(xOri);
+    xLight.SetAmbientColor({ 0.2f, 0.2f, 0.2f, 1.f });
+    xLight.SetDiffuseColor({ 1.f, 1.f, 1.f, 1.f });
+    Light::SetActive(&xLight);
+
+    StaticObject xObject(xWorld, 2);
+    xObject.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
+    StaticObject xObject2(xWorld, 3);
+    xObject2.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
+    xObject2.SetPosition(Vector3<float>(2.f, 0.f, 0.f));
+    StaticObject xObject3(xWorld, 4);
+    xObject3.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
+    xObject3.SetPosition(Vector3<float>(0.f, 2.f, 0.f));
+    StaticObject xObject4(xWorld, 5);
+    xObject4.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
+    xObject4.SetPosition(Vector3<float>(0.f, 0.f, 2.f));
+
+    ObjectController xController(xWorld, 6, &xCamera);
 
     ///////////////////////////////////
     // M A I N L O O P

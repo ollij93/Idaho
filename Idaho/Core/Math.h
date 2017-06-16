@@ -5,6 +5,8 @@
 #include <DirectXMath.h>
 #include "ReactPhysics3D/reactphysics3d.h"
 
+#include "Core/Assert.h"
+
 namespace Math {
     // Constants
     static const float PI = 3.141592654f;
@@ -45,6 +47,15 @@ public:
 
     static inline const Vector3<T> ZeroVector() { return Vector3<T>(); }
 
+    bool operator==(const Vector3<T>& xOther) const
+    {
+        bool bResult = true;
+        bResult = bResult && (x == xOther.x);
+        bResult = bResult && (y == xOther.y);
+        bResult = bResult && (z == xOther.z);
+        return bResult;
+    }
+
     void operator +=(Vector3<T> xVector) { x += xVector.x; y += xVector.y; z += xVector.z; }
     void operator -=(Vector3<T> xVector) { x -= xVector.x; y -= xVector.y; z -= xVector.z; }
     void operator *=(T val) { x *= val; y *= val; z *= val; }
@@ -64,12 +75,20 @@ public:
 
         return xResultVector;
     }
+    T& operator[](char c) {
+        return m_atElements[c]
+    }
 
     T LengthSqrd() const { return x*x + y*y + z*z; }
 
-    T x;
-    T y;
-    T z;
+    union {
+        T m_atElements[3];
+        struct {
+            T x;
+            T y;
+            T z;
+        };
+    };
 };
 
 class Matrix3x3 {
@@ -98,24 +117,55 @@ public:
     ~Matrix3x3() {}
 
     operator rp3d::Matrix3x3() const { return rp3d::Matrix3x3(xx, xy, xz, yx, yy, yz, zx, zy, zz); }
+    operator DirectX::XMMATRIX() const{ return DirectX::XMMATRIX(xx, yx, zx, 0.f, xy, yy, zy, 0.f, xz, yz, zz, 0.f, 0.f, 0.f, 0.f, 1.f); }
 
     static inline const Matrix3x3 Identity() { return Matrix3x3(); }
 
+    bool
+    operator==(const Matrix3x3& xOther) const
+    {
+        bool bResult = true;
+        bResult = bResult && (xx == xOther.xx);
+        bResult = bResult && (xy == xOther.xy);
+        bResult = bResult && (xz == xOther.xz);
+
+        bResult = bResult && (yx == xOther.yx);
+        bResult = bResult && (yy == xOther.yy);
+        bResult = bResult && (yz == xOther.yz);
+
+        bResult = bResult && (zx == xOther.zx);
+        bResult = bResult && (zy == xOther.zy);
+        bResult = bResult && (zz == xOther.zz);
+
+        return bResult;
+    }
+
     Matrix3x3
-    operator*(const Matrix3x3& xMatrix) const
+    operator*(Matrix3x3 xMatrix) const
     {
         Matrix3x3 xResult;
-        xResult.xx = xx *xMatrix.xx + xy * xMatrix.yx + xz * xMatrix.zx;
-        xResult.xy = xx *xMatrix.xy + xy * xMatrix.yy + xz * xMatrix.zy;
-        xResult.xz = xx *xMatrix.xz + xy * xMatrix.yz + xz * xMatrix.zz;
+        xResult.xx = xx * xMatrix.xx + xy * xMatrix.yx + xz * xMatrix.zx;
+        xResult.yx = yx * xMatrix.xx + yy * xMatrix.yx + yz * xMatrix.zx;
+        xResult.zx = zx * xMatrix.xx + zy * xMatrix.yx + zz * xMatrix.zx;
 
-        xResult.yx = yx *xMatrix.xx + yy * xMatrix.yx + yz * xMatrix.zx;
-        xResult.yy = yx *xMatrix.xy + yy * xMatrix.yy + yz * xMatrix.yz;
-        xResult.yz = yx *xMatrix.xz + yy * xMatrix.yz + yz * xMatrix.zz;
+        xResult.xy = xx * xMatrix.xy + xy * xMatrix.yy + xz * xMatrix.zy;
+        xResult.yy = yx * xMatrix.xy + yy * xMatrix.yy + yz * xMatrix.zy;
+        xResult.zy = zx * xMatrix.xy + zy * xMatrix.yy + zz * xMatrix.zy;
 
-        xResult.zx = zx *xMatrix.xx + zy * xMatrix.yx + zz * xMatrix.zx;
-        xResult.zy = zx *xMatrix.xy + zy * xMatrix.yy + zz * xMatrix.zy;
-        xResult.zz = zx *xMatrix.xz + zy * xMatrix.yz + zz * xMatrix.zz;
+        xResult.xz = xx * xMatrix.xz + xy * xMatrix.yz + xz * xMatrix.zz;
+        xResult.yz = yx * xMatrix.xz + yy * xMatrix.yz + yz * xMatrix.zz;
+        xResult.zz = zx * xMatrix.xz + zy * xMatrix.yz + zz * xMatrix.zz;
+
+        return xResult;
+    }
+
+    Vector3<float>
+    operator*(const Vector3<float>& xVector) const
+    {
+        Vector3<float> xResult;
+        xResult.x = xx * xVector.x + xy * xVector.y + xz * xVector.z;
+        xResult.y = yx * xVector.x + yy * xVector.y + yz * xVector.z;
+        xResult.z = zx * xVector.x + zy * xVector.y + zz * xVector.z;
 
         return xResult;
     }
@@ -124,26 +174,46 @@ public:
     RotateLocalX(float fDeltaTheta)
     {
         Matrix3x3 xRotateMat(1.f, 0.f, 0.f,
-            0.f, cosf(fDeltaTheta), -sinf(fDeltaTheta),
-            0.f, sinf(fDeltaTheta), cosf(fDeltaTheta) );
-        Matrix3x3 xResult = xRotateMat * (*this);
+            0.f, cos(fDeltaTheta), -sin(fDeltaTheta),
+            0.f, sin(fDeltaTheta), cos(fDeltaTheta));
+        Matrix3x3 xResult = (*this) * xRotateMat;
         (*this) = xResult;
     }
     void
     RotateWorldY(float fDeltaPhi)
     {
-        Matrix3x3 xRotateMat = { cosf(fDeltaPhi), 0.f, sinf(fDeltaPhi),
+        Matrix3x3 xRotateMat(cos(fDeltaPhi), 0.f, -sin(fDeltaPhi),
             0.f,  1.f, 0.f,
-            -sinf(fDeltaPhi), 0.f, cosf(fDeltaPhi) };
-        Matrix3x3 xResult = (*this) * xRotateMat;
+            sin(fDeltaPhi), 0.f, cos(fDeltaPhi));
+        Matrix3x3 xResult =  xRotateMat * (*this);
         (*this) = xResult;
     }
 
-    Vector3<float> Column1() const { return Vector3<float>(xx, yx, zx); }
-    Vector3<float> Column2() const { return Vector3<float>(xy, yy, zy); }
-    Vector3<float> Column3() const { return Vector3<float>(xz, yz, zz); }
+    Vector3<float> Column(char c) const
+    {
+        switch (c) {
+            case 0:
+                return Vector3<float>(xx, yx, zx);
+            case 1:
+                return Vector3<float>(xy, yy, zy);
+            case 2:
+                return Vector3<float>(xz, yz, zz);
+            default:
+                ASSERT(false, "Invalid value used for operator[] with Matrix3x3");
+                return Vector3<float>::ZeroVector();
+        }
+    }
 
-    float xx, xy, xz;
-    float yx, yy, yz;
-    float zx, zy, zz;
+    float* operator[](char c) {
+        return m_aafElements[c];
+    }
+
+    union {
+        float m_aafElements[3][3];
+        struct {
+            float xx, xy, xz;
+            float yx, yy, yz;
+            float zx, zy, zz;
+        };
+    };
 };
