@@ -10,6 +10,7 @@ public:
         : PARENT(xWorld, uGUID)
         , m_xDiffuseColor()
         , m_xAmbientColor()
+        , m_xSpecularColor()
     {
     }
     ~Light() {}
@@ -22,6 +23,8 @@ public:
     void SetDiffuseColor(Color xColor) { m_xDiffuseColor = xColor; }
     Color GetAmbientColor() const { return m_xAmbientColor; }
     void SetAmbientColor(Color xColor) { m_xAmbientColor = xColor; }
+    Color GetSpecularColor() const { return m_xSpecularColor; }
+    void SetSpecularColor(Color xColor) { m_xSpecularColor = xColor; }
 
     // Static Getters & Setters...
     static Light* GetActive() { return s_pxActive; }
@@ -30,6 +33,7 @@ public:
 private:
     Color m_xDiffuseColor;
     Color m_xAmbientColor;
+    Color m_xSpecularColor;
 
     // Statics...
     static Light* s_pxActive;

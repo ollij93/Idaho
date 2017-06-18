@@ -9,6 +9,7 @@ protected:
     LightShader()
         : PARENT()
         , m_pxLightBuffer(nullptr)
+        , m_pxCameraBuffer(nullptr)
     {
     }
 
@@ -25,11 +26,13 @@ private:
     struct ShaderLightBuffer {
         Color xDiffuseColor;
         Color xAmbientColor;
-        Vector3<float> xLightDirection;
-        float fPadding;
+        DirectX::XMVECTOR xLightDirection;
+        Color xSpecularColor;
+        float fSpecularPower;
     };
 
     ID3D11Buffer* m_pxLightBuffer;
+    ID3D11Buffer* m_pxCameraBuffer;
 
     typedef Shader<LightShader> PARENT;
     friend Singleton<LightShader>;

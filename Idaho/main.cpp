@@ -144,13 +144,14 @@ WinMain(HINSTANCE hInstance,
     Camera::SetActive(&xCamera);
 
     Matrix3x3 xOri;
-    xOri.RotateLocalX(Math::PI * 70.f / 180.f);
+//    xOri.RotateLocalX(Math::PI * 70.f / 180.f);
     xOri.RotateWorldY(Math::PI * 10.f / 180.f);
 
     Light xLight(xWorld, 1);
     xLight.SetOrientation(xOri);
     xLight.SetAmbientColor({ 0.2f, 0.2f, 0.2f, 1.f });
     xLight.SetDiffuseColor({ 1.f, 1.f, 1.f, 1.f });
+    xLight.SetSpecularColor({ 1.0f, 1.0f, 0.5f, 1.f });
     Light::SetActive(&xLight);
 
     StaticObject xObject(xWorld, 2);
