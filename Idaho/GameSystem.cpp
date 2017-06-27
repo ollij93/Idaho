@@ -1,9 +1,9 @@
 // Includes...
 #include "GameSystem.h"
 #include "InputSystem.h"
+#include "Scene.h"
 #include "Core/Assert.h"
 #include "Graphics/GraphicsSystem.h"
-#include "Objects/Entity/Entity.h"
 #include "Specification/SpecificationSystem.h"
 
 // Static variables...
@@ -21,11 +21,20 @@ bool
 GameSystem::Run()
 {
     ASSERT(s_pxThis, "Attempting to run GameSystem before it is created.");
+    if (!s_pxThis) { return false; }
+
+    // Process Input...
     InputSystem::Update();
 
+    // Update Scene...
     clock_t lUpdateTime = clock();
     float fUpdateTime = float(lUpdateTime - s_pxThis->m_lUpdateTime) / CLOCKS_PER_SEC;
-    Entity::ProcessUpdates((fUpdateTime > 0.2f) ? 0.2f : fUpdateTime);
+    ASSERT(Scene::GetActive(), "Failed to get the active scene during game loop!");
+    if (Scene::GetActive()) {
+        Scene::GetActive()->ProcessUpdates((fUpdateTime > 0.2f) ? 0.2f : fUpdateTime);
+    }
+
+    // Do Graphics Rendering...
     GraphicsSystem::Render();
 
     s_pxThis->m_lUpdateTime = lUpdateTime;

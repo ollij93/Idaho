@@ -28,6 +28,21 @@ InputSystem::RegisterKeyCallback(KeyCallbackFunction pvfnFunc, void* pContext, K
 }
 
 /*
+ * UnRegisterKeyCallback : Remove a function callback for a keyboard event message
+ */
+void
+InputSystem::UnRegisterKeyCallback(KeyCallbackFunction pvfnFunc, void* pContext, KeyMapping eKey, KeyMessageType eMessage)
+{
+    ASSERT(s_pxThis, "Attempting to unregister key callbacks before the input system is created");
+    KeyCallbackRegister xReg;
+    xReg.m_pvfnFunc = pvfnFunc;
+    xReg.m_pContext = pContext;
+    xReg.m_eKey = eKey;
+    xReg.m_eMessage = eMessage;
+    s_pxThis->m_lxKeyCallbacks.remove(xReg);
+}
+
+/*
  * RegisterMouseMoveCallback : Register a function callback for mouse movement
  */
 void
@@ -38,6 +53,19 @@ InputSystem::RegisterMouseMoveCallback(MouseMoveCallbackFunction pvfnFunc, void*
     xReg.m_pvfnFunc = pvfnFunc;
     xReg.m_pContext = pContext;
     s_pxThis->m_lxMouseMoveCallbacks.push_back(xReg);
+}
+
+/*
+ * UnRegisterMouseMoveCallback : Remove a function callback for mouse movement
+ */
+void
+InputSystem::UnRegisterMouseMoveCallback(MouseMoveCallbackFunction pvfnFunc, void* pContext)
+{
+    ASSERT(s_pxThis, "Attempting to unregister key callbacks before the input system is created");
+    MouseMoveCallbackRegister xReg;
+    xReg.m_pvfnFunc = pvfnFunc;
+    xReg.m_pContext = pContext;
+    s_pxThis->m_lxMouseMoveCallbacks.remove(xReg);
 }
 
 /*
@@ -52,6 +80,20 @@ InputSystem::RegisterMouseClickCallback(MouseClickCallbackFunction pvfnFunc, voi
     xReg.m_pContext = pContext;
     xReg.m_eMessage = eMessage;
     s_pxThis->m_lxMouseClickCallbacks.push_back(xReg);
+}
+
+/*
+ * UnRegisterKeyCallback : Remove a function callback for a mouse click event message
+ */
+void
+InputSystem::UnRegisterMouseClickCallback(MouseClickCallbackFunction pvfnFunc, void* pContext, MouseMessageType eMessage)
+{
+    ASSERT(s_pxThis, "Attempting to unregister key callbacks before the input system is created");
+    MouseClickCallbackRegister xReg;
+    xReg.m_pvfnFunc = pvfnFunc;
+    xReg.m_pContext = pContext;
+    xReg.m_eMessage = eMessage;
+    s_pxThis->m_lxMouseClickCallbacks.remove(xReg);
 }
 
 /*
@@ -108,8 +150,8 @@ InputSystem::HandleWindowsMessage(HWND gHWND, UINT uMsg, WPARAM wParam, LPARAM l
                 KeyCallbackRegister xReg = *xIter;
                 if (xReg.m_eKey == wParam
                     && (xReg.m_eMessage == ANYKEY_MSG
-                        || (uMsg == WM_KEYDOWN || uMsg == WM_SYSKEYDOWN) && xReg.m_eMessage == DOWN_MSG)
-                        || (uMsg == WM_KEYUP || uMsg == WM_SYSKEYUP) && xReg.m_eMessage == UP_MSG) {
+                        || ((uMsg == WM_KEYDOWN || uMsg == WM_SYSKEYDOWN) && xReg.m_eMessage == DOWN_MSG)
+                        || ((uMsg == WM_KEYUP || uMsg == WM_SYSKEYUP) && xReg.m_eMessage == UP_MSG))) {
                     xReg.m_pvfnFunc(xReg.m_pContext, (KeyMapping)wParam, TranslateKeyMessageType(uMsg));
                 }
             }

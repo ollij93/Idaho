@@ -8,6 +8,30 @@ const float gfMOVERATE = 2.f; ///(2 units per second)
 const float gfMOUSESENSITIVITY = 0.001f;
 
 void
+ObjectController::RegisterInputCallbacks()
+{
+    InputSystem::RegisterKeyCallback(MoveCallback, this, W_KEY, ANYKEY_MSG);
+    InputSystem::RegisterKeyCallback(MoveCallback, this, A_KEY, ANYKEY_MSG);
+    InputSystem::RegisterKeyCallback(MoveCallback, this, S_KEY, ANYKEY_MSG);
+    InputSystem::RegisterKeyCallback(MoveCallback, this, D_KEY, ANYKEY_MSG);
+    InputSystem::RegisterKeyCallback(MoveCallback, this, SHIFT_KEY, ANYKEY_MSG);
+    InputSystem::RegisterKeyCallback(MoveCallback, this, SPACE_KEY, ANYKEY_MSG);
+    InputSystem::RegisterMouseMoveCallback(MouseMoveCallback, this);
+}
+
+void
+ObjectController::UnRegisterInputCallbacks()
+{
+    InputSystem::UnRegisterKeyCallback(MoveCallback, this, W_KEY, ANYKEY_MSG);
+    InputSystem::UnRegisterKeyCallback(MoveCallback, this, A_KEY, ANYKEY_MSG);
+    InputSystem::UnRegisterKeyCallback(MoveCallback, this, S_KEY, ANYKEY_MSG);
+    InputSystem::UnRegisterKeyCallback(MoveCallback, this, D_KEY, ANYKEY_MSG);
+    InputSystem::UnRegisterKeyCallback(MoveCallback, this, SHIFT_KEY, ANYKEY_MSG);
+    InputSystem::UnRegisterKeyCallback(MoveCallback, this, SPACE_KEY, ANYKEY_MSG);
+    InputSystem::UnRegisterMouseMoveCallback(MouseMoveCallback, this);
+}
+
+void
 ObjectController::MoveCallback(void* pContext, KeyMapping eKey, KeyMessageType eMsg)
 {
     bool bDown = (eMsg == DOWN_MSG);

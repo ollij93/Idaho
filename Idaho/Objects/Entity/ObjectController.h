@@ -7,23 +7,18 @@
 
 class ObjectController : public Entity {
 public:
-    ObjectController(rp3d::CollisionWorld &xWorld, u_int uGUID, Object* pxObject)
-        : PARENT(xWorld, uGUID)
+    ObjectController(Scene &xScene, u_int uGUID, Object* pxObject)
+        : PARENT(xScene, uGUID)
         , m_pxObject(pxObject)
         , m_cMovementBools(0)
     {
-        InputSystem::RegisterKeyCallback(MoveCallback, this, W_KEY, ANYKEY_MSG);
-        InputSystem::RegisterKeyCallback(MoveCallback, this, A_KEY, ANYKEY_MSG);
-        InputSystem::RegisterKeyCallback(MoveCallback, this, S_KEY, ANYKEY_MSG);
-        InputSystem::RegisterKeyCallback(MoveCallback, this, D_KEY, ANYKEY_MSG);
-        InputSystem::RegisterKeyCallback(MoveCallback, this, SHIFT_KEY, ANYKEY_MSG);
-        InputSystem::RegisterKeyCallback(MoveCallback, this, SPACE_KEY, ANYKEY_MSG);
-        InputSystem::RegisterMouseMoveCallback(MouseMoveCallback, this);
     }
     ~ObjectController() {}
 
     // Overrides...
     virtual void Update(float fTimestep) override;
+    virtual void RegisterInputCallbacks() override;
+    virtual void UnRegisterInputCallbacks() override;
 
 private:
     static void MoveCallback(void* pContext, KeyMapping eKey, KeyMessageType eMsg);

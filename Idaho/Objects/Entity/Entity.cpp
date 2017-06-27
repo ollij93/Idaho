@@ -1,28 +1,20 @@
 // Includes...
 #include "Entity.h"
+#include "Scene.h"
 
-// Statics...
-std::list<Entity*> Entity::s_lpxEntityList;
-
-Entity::Entity(rp3d::CollisionWorld &xWorld, u_int uGUID)
-    : PARENT(xWorld, uGUID)
+Entity::Entity(Scene &xScene, u_int uGUID)
+    : PARENT(xScene, uGUID)
+    , m_pxScene(&xScene)
 {
-    s_lpxEntityList.push_back(this);
+    if (m_pxScene) {
+        m_pxScene->AddToEntityList(this);
+    }
 }
 
 Entity::~Entity()
 {
-    s_lpxEntityList.remove(this);
-}
-
-void
-Entity::ProcessUpdates(float fTimestep)
-{
-    std::list<Entity*>::const_iterator xIter;
-    for (xIter = s_lpxEntityList.begin(); xIter != s_lpxEntityList.end(); ++xIter) {
-        Entity* pxEntity = *xIter;
-        if (pxEntity) {
-            pxEntity->Update(fTimestep);
-        }
+    if (m_pxScene) {
+        m_pxScene->RemoveFromEntityList(this);
+        m_pxScene = nullptr;
     }
 }

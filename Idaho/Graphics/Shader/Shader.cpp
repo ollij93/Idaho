@@ -4,6 +4,7 @@
 #include <list>
 
 // Includes...
+#include "Scene.h"
 #include "Shader.h"
 #include "Core/Assert.h"
 #include "Objects/Camera.h"
@@ -20,7 +21,10 @@ Shader<T>::Render()
     ASSERT(pxDeviceContext, "Failed to get the directX device context for rendering shader.");
     if (!pxDeviceContext) { return false; }
 
-    Camera* pxCamera = Camera::GetActive();
+    Camera* pxCamera = nullptr;
+    if (Scene::GetActive()) {
+        pxCamera = Scene::GetActive()->GetActiveCamera();
+    }
     ASSERT(pxCamera, "Failed to get the active camera when rendering a shader");
     if (!pxCamera) { return false; }
 

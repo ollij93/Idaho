@@ -63,6 +63,8 @@ Renderable::Init()
         if (FAILED(hResult)) { return false; }
     }
 
+    AddToRenderList();
+
     delete[] pxVertices;
     pxVertices = nullptr;
 
@@ -75,6 +77,8 @@ Renderable::Init()
 void
 Renderable::Shutdown()
 {
+    RemoveFromRenderList();
+
     if (m_pxIndexBuffer) {
         m_pxIndexBuffer->Release();
         m_pxIndexBuffer = nullptr;
@@ -98,4 +102,25 @@ Renderable::Render()
     pxDeviceContext->IASetVertexBuffers(0, 1, &m_pxVertexBuffer, &uSize, &uOffset);
     pxDeviceContext->IASetIndexBuffer(m_pxIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
     pxDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+}
+
+/*
+ * SetActive : Set whether the renderable is currently active or not.
+ *             When the Renderable is created it defaults to active true.
+ */
+void
+Renderable::SetActive(bool bActive)
+{
+    // Already in this active state
+    if (bActive == m_bActive) { return; }
+
+    // Add or remove from render list
+    if (m_bActive) {
+        AddToRenderList();
+    } else {
+        RemoveFromRenderList();
+    }
+
+    // Update the active state
+    m_bActive = bActive;
 }

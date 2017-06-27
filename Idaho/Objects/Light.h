@@ -6,8 +6,8 @@
 
 class Light : public Object {
 public:
-    Light(rp3d::CollisionWorld &xWorld, u_int uGUID)
-        : PARENT(xWorld, uGUID)
+    Light(Scene &xScene, u_int uGUID)
+        : PARENT(xScene, uGUID)
         , m_xDiffuseColor()
         , m_xAmbientColor()
     {
@@ -23,16 +23,9 @@ public:
     Color GetAmbientColor() const { return m_xAmbientColor; }
     void SetAmbientColor(Color xColor) { m_xAmbientColor = xColor; }
 
-    // Static Getters & Setters...
-    static Light* GetActive() { return s_pxActive; }
-    static void SetActive(Light* pxActive) { s_pxActive = pxActive; }
-
 private:
     Color m_xDiffuseColor;
     Color m_xAmbientColor;
-
-    // Statics...
-    static Light* s_pxActive;
 
     typedef Object PARENT;
 };

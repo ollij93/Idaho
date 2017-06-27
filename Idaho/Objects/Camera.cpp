@@ -8,9 +8,6 @@ extern u_int guSCREENHEIGHT;
 extern const float gfSCREENNEAR;
 extern const float gfSCREENDEPTH;
 
-// Statics...
-Camera* Camera::s_pxActive = nullptr;
-
 void
 Camera::Render()
 {

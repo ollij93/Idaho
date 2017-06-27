@@ -192,6 +192,7 @@
     <ClCompile Include="Objects\Object.cpp" />
     <ClCompile Include="Objects\Light.cpp" />
     <ClCompile Include="Objects\StaticObject.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Specification\Specification.cpp" />
     <ClCompile Include="Specification\SpecificationSystem.cpp" />
   </ItemGroup>
@@ -286,6 +287,7 @@
     <ClInclude Include="Objects\Light.h" />
     <ClInclude Include="Objects\Object.h" />
     <ClInclude Include="Objects\StaticObject.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Specification\Specification.h" />
     <ClInclude Include="Specification\SpecificationSystem.h" />

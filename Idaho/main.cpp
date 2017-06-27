@@ -8,6 +8,7 @@
 #include "Core/assert.h"
 #include "GameSystem.h"
 
+#include "Scene.h"
 #include "Objects/Camera.h"
 #include "Objects/Light.h"
 #include "Objects/StaticObject.h"
@@ -20,6 +21,20 @@ extern u_int guSCREENWIDTH = 0;
 extern u_int guSCREENHEIGHT = 0;
 extern const float gfSCREENNEAR = 0.1f;
 extern const float gfSCREENDEPTH = 1000.f;
+
+Scene* gapxScenes[2];
+
+void
+SwitchToScene(void* pContext, KeyMapping eKey, KeyMessageType eMsg)
+{
+    if (eKey == KEY_1) {
+        Scene::SetActive(gapxScenes[0]);
+    } else if (eKey == KEY_2) {
+        Scene::SetActive(gapxScenes[1]);
+    } else {
+        ASSERT(false, "SHOULD NOT BE CALLED FOR THIS KEY!");
+    }
+}
 
 /*
  * InitWindow : Create the Windows objects and initialize the window
@@ -137,35 +152,61 @@ WinMain(HINSTANCE hInstance,
     bResult = GameSystem::Create();
     ASSERT(bResult, "Failed to create GameSystem");
 
-    rp3d::CollisionWorld xWorld;
+    Scene xScene1;
 
-    Camera xCamera(xWorld, 0);
-    xCamera.SetPosition(-1.f, 1.f, -5.f);
-    Camera::SetActive(&xCamera);
+    Camera xCamera1(xScene1, 0);
+    xCamera1.SetPosition(-1.f, 1.f, -5.f);
+    xScene1.SetActiveCamera(&xCamera1);
 
     Matrix3x3 xOri;
     xOri.RotateLocalX(Math::PI * 70.f / 180.f);
     xOri.RotateWorldY(Math::PI * 10.f / 180.f);
 
-    Light xLight(xWorld, 1);
-    xLight.SetOrientation(xOri);
-    xLight.SetAmbientColor({ 0.2f, 0.2f, 0.2f, 1.f });
-    xLight.SetDiffuseColor({ 1.f, 1.f, 1.f, 1.f });
-    Light::SetActive(&xLight);
+    Light xLight1(xScene1, 1);
+    xLight1.SetOrientation(xOri);
+    xLight1.SetAmbientColor({ 0.2f, 0.2f, 0.2f, 1.f });
+    xLight1.SetDiffuseColor({ 1.f, 1.f, 1.f, 1.f });
+    xScene1.SetActiveLight(&xLight1);
 
-    StaticObject xObject(xWorld, 2);
+    StaticObject xObject(xScene1, 2);
     xObject.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
-    StaticObject xObject2(xWorld, 3);
+    StaticObject xObject2(xScene1, 3);
     xObject2.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
     xObject2.SetPosition(Vector3<float>(2.f, 0.f, 0.f));
-    StaticObject xObject3(xWorld, 4);
+    StaticObject xObject3(xScene1, 4);
     xObject3.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
     xObject3.SetPosition(Vector3<float>(0.f, 2.f, 0.f));
-    StaticObject xObject4(xWorld, 5);
+    StaticObject xObject4(xScene1, 5);
     xObject4.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
     xObject4.SetPosition(Vector3<float>(0.f, 0.f, 2.f));
 
-    ObjectController xController(xWorld, 6, &xCamera);
+    ObjectController xController1(xScene1, 6, &xCamera1);
+
+    Scene xScene2;
+
+    Camera xCamera2(xScene2, 100);
+    xCamera2.SetPosition(-1.f, 1.f, -5.f);
+    xScene2.SetActiveCamera(&xCamera2);
+
+    Light xLight2(xScene2, 101);
+    xLight2.SetOrientation(xOri);
+    xLight2.SetAmbientColor({ 0.2f, 0.2f, 0.2f, 1.f });
+    xLight2.SetDiffuseColor({ 1.f, 0.2f, 0.2f, 1.f });
+    xScene2.SetActiveLight(&xLight2);
+
+    StaticObject xObject__(xScene2, 103);
+    xObject__.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
+    xObject__.SetPosition(Vector3<float>(2.f, 0.f, 0.f));
+
+    ObjectController xController2(xScene2, 106, &xCamera2);
+
+    Scene::SetActive(&xScene1);
+
+    gapxScenes[0] = &xScene1;
+    gapxScenes[1] = &xScene2;
+
+    InputSystem::RegisterKeyCallback(SwitchToScene, nullptr, KEY_1, UP_MSG);
+    InputSystem::RegisterKeyCallback(SwitchToScene, nullptr, KEY_2, UP_MSG);
 
     ///////////////////////////////////
     // M A I N L O O P
