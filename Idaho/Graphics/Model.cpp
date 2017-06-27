@@ -11,11 +11,6 @@
 #define MAX_MODEL_FILENAME_SIZE 256
 #define MAX_MODEL_LINE_LENGTH 1024
 
-Model::Model()
-: m_uModelHash(uHASH_UNSET)
-{
-}
-
 bool
 Model::Init()
 {

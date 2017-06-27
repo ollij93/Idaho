@@ -1,12 +1,10 @@
 #pragma once
 
-// External Includes...
-#include "ReactPhysics3D/reactphysics3d.h"
-
 // Includes...
 #include "Core/Math.h"
 #include "Core/Types.h"
 #include "Graphics/Renderable.h"
+#include "Scene.h"
 #include "Specification/Specification.h"
 
 enum ColliderType {
@@ -23,9 +21,9 @@ enum ColliderType {
 
 class Object {
 public:
-    Object(rp3d::CollisionWorld &xWorld, u_int uGUID)
-        : m_xCollisionbody(rp3d::Transform::identity(), xWorld, uGUID)
-        , m_pxCollisionWorld(&xWorld)
+    Object(Scene &xScene, u_int uGUID)
+        : m_xCollisionbody(rp3d::Transform::identity(), *xScene.GetWorld(), uGUID)
+        , m_pxCollisionWorld(xScene.GetWorld())
         , m_uGUID(uGUID)
     {
     }
@@ -61,9 +59,9 @@ protected:
 // Abstract class to handle the multiple inheritance of Object and Renderable
 class RenderableObject : public Object, public Renderable {
 public:
-    RenderableObject::RenderableObject(rp3d::CollisionWorld &xWorld, u_int uGUID)
-        : Object(xWorld, uGUID)
-        , Renderable()
+    RenderableObject::RenderableObject(Scene &xScene, u_int uGUID)
+        : Object(xScene, uGUID)
+        , Renderable(xScene)
     {
     }
 
@@ -76,5 +74,10 @@ public:
         const Vector3<float> xPos = GetPosition();
         DirectX::XMMATRIX xWorldMatrix = DirectX::XMMatrixTranslation(xPos.x, xPos.y, xPos.z);
         return DirectX::XMMatrixMultiply(xOri, xWorldMatrix);
+    }
+    virtual void InitFromSpecification(const Specification* pxSpecification) override
+    {
+        Object::InitFromSpecification(pxSpecification);
+        AddToRenderList();
     }
 };

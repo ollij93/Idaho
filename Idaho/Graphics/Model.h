@@ -5,7 +5,10 @@
 
 class Model : public Renderable {
 public:
-    Model();
+    Model(Scene& xScene)
+        : Renderable(xScene)
+        , m_uModelHash(uHASH_UNSET)
+    {}
     virtual ~Model() override {}
 
     void SetModelHash(Hash uModelHash) { m_uModelHash = uModelHash; }
@@ -13,6 +16,9 @@ public:
 
     virtual bool Init() override;
     virtual void Shutdown();
+
+    virtual void AddToRenderList() override {}
+    virtual void RemoveFromRenderList() override {}
 
 private:
     Hash m_uModelHash;

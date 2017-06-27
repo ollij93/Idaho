@@ -279,6 +279,7 @@
     <ClCompile Include="Objects\Entity\ObjectController.cpp">
       <Filter>Objects\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -554,6 +555,7 @@
     <ClInclude Include="Objects\Entity\ObjectController.h">
       <Filter>Objects\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">

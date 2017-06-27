@@ -7,11 +7,10 @@
 
 class StaticObject : public RenderableObject {
 public:
-    StaticObject(rp3d::CollisionWorld &xWorld, u_int uGUID)
-        : RenderableObject(xWorld, uGUID)
-        , m_xModel()
+    StaticObject(Scene &xScene, u_int uGUID)
+        : RenderableObject(xScene, uGUID)
+        , m_xModel(xScene)
     {
-        LightShader::AddToRenderList(this);
     }
     ~StaticObject()
     {
@@ -26,6 +25,9 @@ public:
 
     virtual void InitFromSpecification(const Specification* pxSpecification) override;
     virtual void* GetProxyShapeData() override;
+
+    virtual void AddToRenderList() override { LightShader::AddToRenderList(this); }
+    virtual void RemoveFromRenderList() override { LightShader::RemoveFromRenderList(this); }
 
 private:
     Model m_xModel;

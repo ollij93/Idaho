@@ -4,29 +4,30 @@
 #include "Objects/Object.h"
 #include "Graphics/Renderable.h"
 
+// Forward Declarations...
+class Scene;
+
 class Entity : public Object {
 public:
-    Entity(rp3d::CollisionWorld &xWorld, u_int uGUID);
+    Entity(Scene &xScene, u_int uGUID);
     ~Entity();
 
     virtual void Update(float fTimestep) = 0 {}
-
-    // Statics...
-    static void ProcessUpdates(float fTimestep);
+    virtual void RegisterInputCallbacks() {}
+    virtual void UnRegisterInputCallbacks() {}
 
 private:
-    static std::list<Entity*> s_lpxEntityList;
+    Scene* m_pxScene;
     typedef Object PARENT;
 };
 
 // Abstract class to handle the multiple inheritance of Entity and Renderable
 class RenderableEntity : public Entity, public Renderable {
 public:
-    RenderableEntity(rp3d::CollisionWorld &xWorld, u_int uGUID)
-        : Entity(xWorld, uGUID)
-        , Renderable()
-    {
-    }
+    RenderableEntity(Scene &xScene, u_int uGUID)
+        : Entity(xScene, uGUID)
+        , Renderable(xScene)
+    {}
     ~RenderableEntity() {}
 
     // Overrides...

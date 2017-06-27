@@ -66,7 +66,11 @@ LightShader::SetShaderParameters(ID3D11DeviceContext* pxDeviceContext,
     HRESULT hResult;
     D3D11_MAPPED_SUBRESOURCE xMappedResource;
     ShaderLightBuffer* pxDataPtr;
-    Light* pxLight = Light::GetActive();
+    Light* pxLight = nullptr;
+
+    if (Scene::GetActive()) {
+        pxLight = Scene::GetActive()->GetActiveLight();
+    }
     ASSERT(pxLight, "Failed to get the active light for rendering the light shader.");
 
     hResult = pxDeviceContext->Map(m_pxLightBuffer,

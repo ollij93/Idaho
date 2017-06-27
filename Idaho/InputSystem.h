@@ -147,14 +147,17 @@ enum MouseMessageType {
 class InputSystem : public Singleton<InputSystem> {
 public:
     // Callback types...
-    typedef void (*KeyCallbackFunction)(void*, KeyMapping, KeyMessageType);
+    typedef void(*KeyCallbackFunction)(void*, KeyMapping, KeyMessageType);
     static void RegisterKeyCallback(KeyCallbackFunction pvfnFunc, void* pContext, KeyMapping eKey, KeyMessageType eMessage);
+    static void UnRegisterKeyCallback(KeyCallbackFunction pvfnFunc, void* pContext, KeyMapping eKey, KeyMessageType eMessage);
 
     typedef void(*MouseMoveCallbackFunction)(void*, int, int);
     static void RegisterMouseMoveCallback(MouseMoveCallbackFunction pvfnFunc, void* pContext);
+    static void UnRegisterMouseMoveCallback(MouseMoveCallbackFunction pvfnFunc, void* pContext);
 
     typedef void(*MouseClickCallbackFunction)(void*, MouseMessageType, int, int);
     static void RegisterMouseClickCallback(MouseClickCallbackFunction pvfnFunc, void* pContext, MouseMessageType eMessage);
+    static void UnRegisterMouseClickCallback(MouseClickCallbackFunction pvfnFunc, void* pContext, MouseMessageType eMessage);
 
     // Statics...
     static LRESULT CALLBACK HandleWindowsMessage(HWND gHWND, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -181,12 +184,22 @@ private:
         void* m_pContext;
         KeyMapping m_eKey;
         KeyMessageType m_eMessage;
+
+        bool operator==(KeyCallbackRegister xOther)
+        {
+            return (m_pvfnFunc == xOther.m_pvfnFunc && m_pContext == xOther.m_pContext && m_eKey == xOther.m_eKey && m_eMessage == xOther.m_eMessage);
+        }
     };
     std::list<KeyCallbackRegister> m_lxKeyCallbacks;
 
     struct MouseMoveCallbackRegister {
         MouseMoveCallbackFunction m_pvfnFunc;
         void* m_pContext;
+
+        bool operator==(MouseMoveCallbackRegister xOther)
+        {
+            return (m_pvfnFunc == xOther.m_pvfnFunc && m_pContext == xOther.m_pContext);
+        }
     };
     std::list<MouseMoveCallbackRegister> m_lxMouseMoveCallbacks;
 
@@ -194,6 +207,11 @@ private:
         MouseClickCallbackFunction m_pvfnFunc;
         void* m_pContext;
         MouseMessageType m_eMessage;
+
+        bool operator==(MouseClickCallbackRegister xOther)
+        {
+            return (m_pvfnFunc == xOther.m_pvfnFunc && m_pContext == xOther.m_pContext && m_eMessage == xOther.m_eMessage);
+        }
     };
     std::list<MouseClickCallbackRegister> m_lxMouseClickCallbacks;
 
