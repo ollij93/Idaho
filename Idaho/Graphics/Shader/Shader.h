@@ -48,6 +48,8 @@ protected:
     virtual bool CreateMatrixBuffer();
     virtual bool CreateVertexInputLayout(ID3D10Blob* pxVertexShaderBuffer);
     virtual bool CreateSamplerState();
+    virtual void GetProjectionMatrix(DirectX::XMMATRIX& xProjectionMatrix);
+    virtual void GetViewMatrix(DirectX::XMMATRIX& xViewMatrix);
 
     struct ShaderMatrixBuffer {
         DirectX::XMMATRIX xWorldMatrix;
