@@ -25,7 +25,7 @@ Renderable::Init()
     if (!pxDevice) { return false; }
 
     Vertex* pxVertices = new Vertex[m_uVertexCount];
-    u_int* puIndices = new u_int[m_uIndexCount];
+    u_int* puIndices = new u_int[m_uVertexCount];
     if (!pxVertices || !puIndices) { return false; }
 
     for (u_int u = 0; u < m_uVertexCount; u++) {
@@ -51,7 +51,7 @@ Renderable::Init()
     // Create the Index Buffer
     {
         xIndexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-        xIndexBufferDesc.ByteWidth = sizeof(u_int) * m_uIndexCount;
+        xIndexBufferDesc.ByteWidth = sizeof(u_int) * m_uVertexCount;
         xIndexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 
         xIndexData.pSysMem = puIndices;
