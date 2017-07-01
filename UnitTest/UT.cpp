@@ -51,8 +51,51 @@ namespace UnitTest
 
         TEST_METHOD(MatrixFunctionTests)
         {
+            Matrix3x3 xMatrix1;
+            Matrix3x3 xMatrix2;
+
             // Test RotateLocalX()
+            // Tests: Rotate Identity by...
+            // 0 degrees
+            // 90 degrees (pi/2)
+            // 180 degrees (pi)
+            // 270 degrees (3pi/2) == -90 degrees (-pi/2)
+            // 360 degrees (2pi) == 0 degrees
+            xMatrix1 = Matrix3x3::Identity();
+            xMatrix1.RotateLocalX(0.f);
+            Assert::AreEqual(Matrix3x3(), xMatrix1, L"Matrix: RotateLocalX of 0.f is not no-op.", LINE_INFO());
+
+            xMatrix1 = Matrix3x3::Identity();
+            xMatrix1.RotateLocalX(Math::PI/2.f);
+            Assert::AreEqual(Matrix3x3(1.f, 0.f, 0.f, 0.f, 0.f, -1.f, 0.f, 1.f, 0.f), xMatrix1, L"Matrix: RotateLocalX of pi/2 gives unexpected result.", LINE_INFO());
+
+            xMatrix1 = Matrix3x3::Identity();
+            xMatrix1.RotateLocalX(Math::PI);
+            Assert::AreEqual(Matrix3x3(1.f, 0.f, 0.f, 0.f, -1.f, 0.f, 0.f, 0.f, -1.f), xMatrix1, L"Matrix: RotateLocalX of pi gives unexpected result.", LINE_INFO());
+
+            xMatrix1 = Matrix3x3::Identity();
+            xMatrix1.RotateLocalX(3.f*Math::PI/2.f);
+            Assert::AreEqual(Matrix3x3(1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, -1.f, 0.f), xMatrix1, L"Matrix: RotateLocalX of 3pi/2 gives unexpected result.", LINE_INFO());
+
+            xMatrix2 = Matrix3x3::Identity();
+            xMatrix2.RotateLocalX(-Math::PI/2.f);
+            Assert::AreEqual(xMatrix1, xMatrix2, L"Matrix: RotateLocalX of -pi/2 is not equal to rotation of 3pi/2.", LINE_INFO());
+
+            xMatrix1 = Matrix3x3::Identity();
+            xMatrix1.RotateLocalX(2.f*Math::PI);
+            Assert::AreEqual(Matrix3x3(), xMatrix1, L"Matrix: RotateLocalX of 2pi is not a no-op.", LINE_INFO());
+
             // Test RotateWorldY()
+            // Tests: Rotate Identity by...
+            // 0 degrees
+            // 90 degrees (pi/2)
+            // 180 degrees (pi)
+            // 270 degrees (3pi/2) == -90 degrees (-pi/2)
+            // 360 degrees (2pi) == 0 degrees
+
+            // Test both...
+            // Test rotation is ordering independent...
+            // Test combined rotations can be undone in any order...
         }
 
     };
