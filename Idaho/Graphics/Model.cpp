@@ -72,19 +72,18 @@ Model::Init()
             // The line contains information on a vertex
             Vector3<float> xVector;
             sscanf_s(acInput, "v %f %f %f", &xVector.x, &xVector.y, &xVector.z);
-            xVector.z = -xVector.z;
             vxVertices.push_back(xVector);
         } else if (strncmp(acInput, "vt", 2) == 0) {
             // The line contains information on a texture
             Vector2<float> xVector;
             sscanf_s(acInput, "vt %f %f", &xVector.x, &xVector.y);
+            // DirectX uses texture coords from bottom to top not top to bottom
             xVector.y = 1.f - xVector.y;
             vxTexCoords.push_back(xVector);
         } else if (strncmp(acInput, "vn", 2) == 0) {
             // The line contains information on a normal
             Vector3<float> xVector;
             sscanf_s(acInput, "vn %f %f %f", &xVector.x, &xVector.y, &xVector.z);
-            xVector.z = -xVector.z;
             vxNormals.push_back(xVector);
         } else if (strncmp(acInput, "f ", 2) == 0) {
             // The line contains information on a face
@@ -115,13 +114,13 @@ Model::Init()
                 xTriFace.iTex1 = vxFaceNodes[0].y;
                 xTriFace.iNormal1 = vxFaceNodes[0].z;
 
-                xTriFace.iVertex2 = vxFaceNodes[1 + uIndex].x;
-                xTriFace.iTex2 = vxFaceNodes[1 + uIndex].y;
-                xTriFace.iNormal2 = vxFaceNodes[1 + uIndex].z;
+                xTriFace.iVertex2 = vxFaceNodes[2 + uIndex].x;
+                xTriFace.iTex2 = vxFaceNodes[2 + uIndex].y;
+                xTriFace.iNormal2 = vxFaceNodes[2 + uIndex].z;
 
-                xTriFace.iVertex3 = vxFaceNodes[2 + uIndex].x;
-                xTriFace.iTex3 = vxFaceNodes[2 + uIndex].y;
-                xTriFace.iNormal3 = vxFaceNodes[2 + uIndex].z;
+                xTriFace.iVertex3 = vxFaceNodes[1 + uIndex].x;
+                xTriFace.iTex3 = vxFaceNodes[1 + uIndex].y;
+                xTriFace.iNormal3 = vxFaceNodes[1 + uIndex].z;
 
                 vxFaces.push_back(xTriFace);
             }
@@ -131,7 +130,6 @@ Model::Init()
 
     // Loop through the faces and use this to fill in the vertex info
     m_uVertexCount = 3 * vxFaces.size();
-    m_uIndexCount = m_uVertexCount;
     m_pxVertices = new Vertex[m_uVertexCount];
     for (u_int u = 0; u < vxFaces.size(); u++) {
         m_pxVertices[3 * u].m_xPosition = vxVertices[vxFaces[u].iVertex1 - 1];
