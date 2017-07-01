@@ -1,6 +1,7 @@
 // Includes...
 #include "RenderSystem.h"
 #include "Core/Assert.h"
+#include "Graphics/Shader/BitMapShader.h"
 #include "Graphics/Shader/ColorShader.h"
 #include "Graphics/Shader/LightShader.h"
 #include "Graphics/Shader/TextureShader.h"
@@ -25,6 +26,9 @@ RenderSystem::Init()
     bResult = LightShader::Create();
     if (!bResult) { return false; }
 
+    bResult = BitMapShader::Create();
+    if (!bResult) { return false; }
+
     return bResult;
 }
 
@@ -34,6 +38,10 @@ RenderSystem::Init()
 void
 RenderSystem::Shutdown()
 {
+    BitMapShader::Destroy();
+    LightShader::Destroy();
+    TextureShader::Destroy();
+    ColorShader::Destroy();
 }
 
 /*
@@ -51,6 +59,9 @@ RenderSystem::Render()
     if (!bResult) { return false; }
 
     bResult = LightShader::Render();
+    if (!bResult) { return false; }
+
+    bResult = BitMapShader::Render();
     if (!bResult) { return false; }
 
     return bResult;

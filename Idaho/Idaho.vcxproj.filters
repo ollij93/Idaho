@@ -40,6 +40,9 @@
     <Filter Include="Component\ReactPhysics3D">
       <UniqueIdentifier>{8427287e-8a9e-42e6-abbe-948993902360}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\2D">
+      <UniqueIdentifier>{f90c8896-76f2-4891-8597-5eabc52b3b4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -280,6 +283,12 @@
       <Filter>Objects\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Graphics\2D\Renderable2D.cpp">
+      <Filter>Graphics\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader\BitMapShader.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -556,6 +565,12 @@
       <Filter>Objects\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Graphics\2D\Renderable2D.h">
+      <Filter>Graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader\BitMapShader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">

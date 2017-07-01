@@ -31,8 +31,8 @@ Shader<T>::Render()
     DirectX::XMMATRIX xViewMatrix;
     DirectX::XMMATRIX xProjectionMatrix;
     pxCamera->Render();
-    pxCamera->GetProjectionMatrix(xProjectionMatrix);
-    pxCamera->GetViewMatrix(xViewMatrix);
+    s_pxThis->GetProjectionMatrix(xProjectionMatrix);
+    s_pxThis->GetViewMatrix(xViewMatrix);
 
     std::list<Renderable*>::const_iterator xIter;
     for (xIter = s_lpxRenderableslist.begin(); xIter != s_lpxRenderableslist.end(); ++xIter) {
@@ -397,6 +397,35 @@ Shader<T>::CreateSamplerState()
     if (FAILED(hResult)) { return false; }
 
     return true;
+}
+
+template<typename T>
+void
+Shader<T>::GetProjectionMatrix(DirectX::XMMATRIX& xProjectionMatrix)
+{
+
+    Camera* pxCamera = nullptr;
+    if (Scene::GetActive()) {
+        pxCamera = Scene::GetActive()->GetActiveCamera();
+    }
+    ASSERT(pxCamera, "Failed to get the active camera when rendering a shader");
+    if (!pxCamera) { return; }
+
+    pxCamera->GetProjectionMatrix(xProjectionMatrix);
+}
+
+template<typename T>
+void
+Shader<T>::GetViewMatrix(DirectX::XMMATRIX& xViewMatrix)
+{
+    Camera* pxCamera = nullptr;
+    if (Scene::GetActive()) {
+        pxCamera = Scene::GetActive()->GetActiveCamera();
+    }
+    ASSERT(pxCamera, "Failed to get the active camera when rendering a shader");
+    if (!pxCamera) { return; }
+
+    pxCamera->GetViewMatrix(xViewMatrix);
 }
 
 // Include the registry to generate all the specialized class objects from the templated types

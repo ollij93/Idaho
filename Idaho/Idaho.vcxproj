@@ -174,11 +174,13 @@
     <ClCompile Include="..\ReactPhysics3D\memory\MemoryAllocator.cpp" />
     <ClCompile Include="..\TinyXML\tinyxml2.cpp" />
     <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="Graphics\2D\Renderable2D.cpp" />
     <ClCompile Include="Graphics\D3DSystem.cpp" />
     <ClCompile Include="Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="Graphics\Model.cpp" />
     <ClCompile Include="Graphics\Renderable.cpp" />
     <ClCompile Include="Graphics\RenderSystem.cpp" />
+    <ClCompile Include="Graphics\Shader\BitMapShader.cpp" />
     <ClCompile Include="Graphics\Shader\ColorShader.cpp" />
     <ClCompile Include="Graphics\Shader\LightShader.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
@@ -269,11 +271,13 @@
     <ClInclude Include="Core\Math.h" />
     <ClInclude Include="Core\Types.h" />
     <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="Graphics\2D\Renderable2D.h" />
     <ClInclude Include="Graphics\D3DSystem.h" />
     <ClInclude Include="Graphics\GraphicsSystem.h" />
     <ClInclude Include="Graphics\Model.h" />
     <ClInclude Include="Graphics\Renderable.h" />
     <ClInclude Include="Graphics\RenderSystem.h" />
+    <ClInclude Include="Graphics\Shader\BitMapShader.h" />
     <ClInclude Include="Graphics\Shader\ColorShader.h" />
     <ClInclude Include="Graphics\Shader\LightShader.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
