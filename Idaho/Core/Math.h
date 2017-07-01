@@ -7,6 +7,8 @@
 
 #include "Core/Assert.h"
 
+#define FLOATCOMP_EPSILON 0.0001f
+
 namespace Math {
     // Constants
     static const float PI = 3.141592654f;
@@ -27,7 +29,9 @@ public:
     static inline const Vector2<T> ZeroVector() { return Vector2<T>(); }
 
     Vector2<T> operator +(const Vector2<T>& xVector) const { return Vector2<T>(x + xVector.x, y + xVector.y); }
+    void operator +=(const Vector2<T>& xVector) { x += xVector.x; y += xVector.y; }
     Vector2<T> operator -(const Vector2<T>& xVector) const { return Vector2<T>(x - xVector.x, y - xVector.y); }
+    void operator -=(const Vector2<T>& xVector) { x -= xVector.x; y -= xVector.y; }
 
     T x;
     T y;
@@ -125,17 +129,17 @@ public:
     operator==(const Matrix3x3& xOther) const
     {
         bool bResult = true;
-        bResult = bResult && (xx == xOther.xx);
-        bResult = bResult && (xy == xOther.xy);
-        bResult = bResult && (xz == xOther.xz);
+        bResult = bResult && (abs(xx - xOther.xx) < FLOATCOMP_EPSILON);
+        bResult = bResult && (abs(xy - xOther.xy) < FLOATCOMP_EPSILON);
+        bResult = bResult && (abs(xz - xOther.xz) < FLOATCOMP_EPSILON);
 
-        bResult = bResult && (yx == xOther.yx);
-        bResult = bResult && (yy == xOther.yy);
-        bResult = bResult && (yz == xOther.yz);
+        bResult = bResult && (abs(yx - xOther.yx) < FLOATCOMP_EPSILON);
+        bResult = bResult && (abs(yy - xOther.yy) < FLOATCOMP_EPSILON);
+        bResult = bResult && (abs(yz - xOther.yz) < FLOATCOMP_EPSILON);
 
-        bResult = bResult && (zx == xOther.zx);
-        bResult = bResult && (zy == xOther.zy);
-        bResult = bResult && (zz == xOther.zz);
+        bResult = bResult && (abs(zx - xOther.zx) < FLOATCOMP_EPSILON);
+        bResult = bResult && (abs(zy - xOther.zy) < FLOATCOMP_EPSILON);
+        bResult = bResult && (abs(zz - xOther.zz) < FLOATCOMP_EPSILON);
 
         return bResult;
     }
