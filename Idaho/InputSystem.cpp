@@ -182,16 +182,17 @@ InputSystem::Update()
     }
 
     // Reset the cursor
-    xPoint = { iMOUSEPOSX, iMOUSEPOSY };
-    ClientToScreen(WindowManager::GetHandle(), &xPoint);
-    SetCursorPos(xPoint.x, xPoint.y);
+    if (s_pxThis->m_bLockMouse) {
+        xPoint = { iMOUSEPOSX, iMOUSEPOSY };
+        ClientToScreen(WindowManager::GetHandle(), &xPoint);
+        SetCursorPos(xPoint.x, xPoint.y);
+    }
 }
 
 bool
 InputSystem::Init()
 {
     SetCapture(WindowManager::GetHandle());
-    ShowCursor(false);
     POINT xPoint = { iMOUSEPOSX, iMOUSEPOSY };
     ScreenToClient(WindowManager::GetHandle(), &xPoint);
     SetCursorPos(xPoint.x, xPoint.y);
@@ -201,7 +202,7 @@ InputSystem::Init()
 void
 InputSystem::Shutdown()
 {
-    ShowCursor(true);
+    while (ShowCursor(true) < 0) {}
     ReleaseCapture();
 }
 

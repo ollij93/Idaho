@@ -1,5 +1,6 @@
 // Includes...
 #include "Scene.h"
+#include "InputSystem.h"
 #include "Objects/Entity/Entity.h"
 
 // Statics...
@@ -53,11 +54,20 @@ Scene::Activate()
             pxEntity->RegisterInputCallbacks();
         }
     }
+
+    if (m_bTrapCursor) {
+        while (ShowCursor(false) >= 0) {}
+        InputSystem::SetLockMouse(true);
+    }
 }
 
 void
 Scene::Deactivate()
 {
+    // Ensure the cursor is shown
+    while (ShowCursor(true) < 0) {}
+    InputSystem::SetLockMouse(false);
+
     // Loop through Renderables and remove them from the render lists
     std::list<Renderable*>::const_iterator xIterRenderable;
     for (xIterRenderable = m_lpxRenderableList.begin(); xIterRenderable != m_lpxRenderableList.end(); ++xIterRenderable) {

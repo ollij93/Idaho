@@ -97,7 +97,7 @@ void
 WindowManager::ShutdownWindow()
 {
     // Show the mouse cursor
-    ShowCursor(true);
+    while (ShowCursor(true) < 0) {}
 
     // Reset the display settings
     ChangeDisplaySettings(NULL, 0);

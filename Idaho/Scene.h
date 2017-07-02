@@ -18,6 +18,7 @@ public:
     , m_lpxRenderableList()
     , m_pxActiveCamera(nullptr)
     , m_pxActiveLight(nullptr)
+    , m_bTrapCursor(false)
     {}
     ~Scene() {}
 
@@ -33,6 +34,7 @@ public:
     void SetActiveCamera(Camera* pxCamera) { m_pxActiveCamera = pxCamera; }
     Light* GetActiveLight() { return m_pxActiveLight; }
     void SetActiveLight(Light* pxLight) { m_pxActiveLight = pxLight; }
+    void SetTrapCursor(bool bSet) { m_bTrapCursor = bSet; }
 
     // Statics...
     static Scene* GetActive() { return s_pxActive; }
@@ -48,6 +50,7 @@ private:
     std::list<Renderable*> m_lpxRenderableList;
     Camera* m_pxActiveCamera;
     Light* m_pxActiveLight;
+    bool m_bTrapCursor;
 
     // Statics...
     static Scene* s_pxActive;
