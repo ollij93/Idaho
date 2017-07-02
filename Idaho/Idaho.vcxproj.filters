@@ -293,6 +293,7 @@
       <Filter>Graphics\2D</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\2D\Text.cpp" />
+    <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -579,6 +580,7 @@
       <Filter>Graphics\2D</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\2D\Text.h" />
+    <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">

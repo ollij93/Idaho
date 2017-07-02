@@ -3,15 +3,13 @@
 #ifdef USE_ASSERT
 
 // Includes...
-#include <Windows.h>
-
-extern HWND gHWND;
+#include "WindowManager.h"
 
 #define ASSERT(__cond,__hint) \
     do { \
         if(!(__cond)) \
         { \
-            const int iResult = MessageBox(gHWND, ##__hint, "Assert", MB_ABORTRETRYIGNORE); \
+            const int iResult = MessageBox(WindowManager::GetHandle(), ##__hint, "Assert", MB_ABORTRETRYIGNORE); \
             if(iResult == IDABORT) \
             { \
                 __debugbreak(); \

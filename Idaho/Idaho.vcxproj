@@ -199,6 +199,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Specification\Specification.cpp" />
     <ClCompile Include="Specification\SpecificationSystem.cpp" />
+    <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.h" />
@@ -299,6 +300,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Specification\Specification.h" />
     <ClInclude Include="Specification\SpecificationSystem.h" />
+    <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">

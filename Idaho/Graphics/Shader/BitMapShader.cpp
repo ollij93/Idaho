@@ -1,12 +1,8 @@
 // Includes...
 #include "BitMapShader.h"
+#include "WindowManager.h"
 
-// Global Variables...
-extern u_int guSCREENWIDTH;
-extern u_int guSCREENHEIGHT;
-extern const float gfSCREENNEAR;
-extern const float gfSCREENDEPTH;
-
+// Statics...
 BitMapShader* Singleton<BitMapShader>::s_pxThis = nullptr;
 std::list<Renderable*> Shader<BitMapShader>::s_lpxRenderableslist;
 
@@ -14,7 +10,10 @@ void
 BitMapShader::GetProjectionMatrix(DirectX::XMMATRIX& xProjectionMatrix)
 {
     // Create the projection matrix
-    xProjectionMatrix = DirectX::XMMatrixOrthographicRH((float)guSCREENWIDTH, (float)guSCREENHEIGHT, gfSCREENNEAR, gfSCREENDEPTH);
+    xProjectionMatrix = DirectX::XMMatrixOrthographicRH((float)WindowManager::GetScreenWidth(),
+        (float)WindowManager::GetScreenHeight(),
+        WindowManager::GetScreenNear(),
+        WindowManager::GetScreenDepth());
 }
 
 void
