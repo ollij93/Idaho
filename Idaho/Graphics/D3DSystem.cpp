@@ -1,15 +1,7 @@
 // Includes...
 #include "D3DSystem.h"
+#include "WindowManager.h"
 #include "Core/Assert.h"
-
-// Externs...
-extern HWND gHWND;
-extern const bool gbFULLSCREEN;
-extern u_int guSCREENWIDTH;
-extern u_int guSCREENHEIGHT;
-
-// Global Variables...
-const bool gbVSYNC = false;
 
 // Static Variables...
 D3DSystem* Singleton<D3DSystem>::s_pxThis = nullptr;
@@ -55,7 +47,7 @@ D3DSystem::EndScene()
 {
     if (!s_pxThis) { return; }
     // Present the back buffer to the screen since rendering is complete.
-    if (gbVSYNC) {
+    if (WindowManager::GetVSyncEnabled()) {
         // Lock to screen refresh rate.
         s_pxThis->m_pxSwapChain->Present(1, 0);
     } else {
@@ -163,7 +155,7 @@ D3DSystem::Init()
     {
         xSwapChainDesc.BufferCount = 1;
         xSwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        xSwapChainDesc.OutputWindow = gHWND;
+        xSwapChainDesc.OutputWindow = WindowManager::GetHandle();
         xSwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
         xSwapChainDesc.Flags = 0;
         xSwapChainDesc.BufferDesc.Width = uScreenWidth;
@@ -171,14 +163,14 @@ D3DSystem::Init()
         xSwapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
         xSwapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
         xSwapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-        if (gbVSYNC) {
+        if (WindowManager::GetVSyncEnabled()) {
             xSwapChainDesc.BufferDesc.RefreshRate.Numerator = uRefreshRateNumerator;
             xSwapChainDesc.BufferDesc.RefreshRate.Denominator = uRefreshRateDenominator;
         } else {
             xSwapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
             xSwapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
         }
-        xSwapChainDesc.Windowed = !gbFULLSCREEN;
+        xSwapChainDesc.Windowed = !WindowManager::GetFullscreen();
         // Turn multisampling on if available.
         for (int i = 1; i <= 16; i *= 2) {
             u_int uQuality = -1;

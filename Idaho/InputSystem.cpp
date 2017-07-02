@@ -171,7 +171,7 @@ InputSystem::Update()
     // Handle mouse movement
     POINT xPoint;
     GetCursorPos(&xPoint);
-    ScreenToClient(gHWND, &xPoint);
+    ScreenToClient(WindowManager::GetHandle(), &xPoint);
 
     int iMouseMoveX = xPoint.x - iMOUSEPOSX;
     int iMouseMoveY = xPoint.y - iMOUSEPOSY;
@@ -183,17 +183,17 @@ InputSystem::Update()
 
     // Reset the cursor
     xPoint = { iMOUSEPOSX, iMOUSEPOSY };
-    ClientToScreen(gHWND, &xPoint);
+    ClientToScreen(WindowManager::GetHandle(), &xPoint);
     SetCursorPos(xPoint.x, xPoint.y);
 }
 
 bool
 InputSystem::Init()
 {
-    SetCapture(gHWND);
+    SetCapture(WindowManager::GetHandle());
     ShowCursor(false);
     POINT xPoint = { iMOUSEPOSX, iMOUSEPOSY };
-    ScreenToClient(gHWND, &xPoint);
+    ScreenToClient(WindowManager::GetHandle(), &xPoint);
     SetCursorPos(xPoint.x, xPoint.y);
     return true;
 }

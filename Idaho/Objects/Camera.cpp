@@ -2,12 +2,6 @@
 #include "Camera.h"
 #include "Core/Types.h"
 
-// Global Variables...
-extern u_int guSCREENWIDTH;
-extern u_int guSCREENHEIGHT;
-extern const float gfSCREENNEAR;
-extern const float gfSCREENDEPTH;
-
 void
 Camera::Render()
 {
@@ -28,5 +22,8 @@ Camera::Render()
     m_xViewMatrix = DirectX::XMMatrixLookAtRH(xPos, xLookAt, xUpVec);
 
     // Create the projection matrix
-    m_xProjectionMatrix = DirectX::XMMatrixPerspectiveFovRH(m_fFieldOfView, (float)guSCREENWIDTH/(float)guSCREENHEIGHT, gfSCREENNEAR, gfSCREENDEPTH);
+    m_xProjectionMatrix = DirectX::XMMatrixPerspectiveFovRH(m_fFieldOfView,
+        (float)WindowManager::GetScreenWidth()/(float)WindowManager::GetScreenHeight(),
+        WindowManager::GetScreenNear(),
+        WindowManager::GetScreenDepth());
 }
