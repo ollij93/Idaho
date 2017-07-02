@@ -26,6 +26,8 @@ public:
     static ID3D11Device* GetDevice() { return (s_pxThis) ? s_pxThis->m_pxDevice : nullptr; }
     static ID3D11DeviceContext* GetDeviceContext() { return (s_pxThis) ? s_pxThis->m_pxDeviceContext : nullptr; }
 
+    static void SetZBufferEnabled(bool bSet);
+
 protected:
     virtual bool Init() override;
     virtual void Shutdown() override;
@@ -40,8 +42,8 @@ private:
     ID3D11DepthStencilView* m_pxDepthStencilView;
     IDXGISwapChain* m_pxSwapChain;
     ID3D11BlendState* m_pxAlphaBlendingState;
-
-    // Maybe not needed...
+    ID3D11DepthStencilState* m_pxDepthStencilState;
+    ID3D11DepthStencilState* m_pxDepthDisabledStencilState;
     ID3D11Texture2D* m_pxDepthStencilBuffer;
 
     friend Singleton<D3DSystem>;

@@ -3,21 +3,27 @@
 #include "GameSystem.h"
 
 #include "Scene.h"
+#include "Graphics/2D/Renderable2D.h"
+#include "Graphics/2D/Text.h"
 #include "Objects/Camera.h"
 #include "Objects/Light.h"
 #include "Objects/StaticObject.h"
 #include "Objects/Entity/ObjectController.h"
 
 // Global Variables...
-Scene* gapxScenes[2];
+// TODO: Scene* gpxMenu;
+Scene* gpxScene;
+Scene* gpxConsole;
 
 void
-SwitchToScene(void* pContext, KeyMapping eKey, KeyMessageType eMsg)
+ToggleConsole(void* pContext, KeyMapping eKey, KeyMessageType eMsg)
 {
-    if (eKey == KEY_1) {
-        Scene::SetActive(gapxScenes[0]);
-    } else if (eKey == KEY_2) {
-        Scene::SetActive(gapxScenes[1]);
+    if (eKey == BACKTICK_KEY) {
+        if (Scene::GetActive() == gpxConsole) {
+            Scene::SetActive(gpxScene);
+        } else {
+            Scene::SetActive(gpxConsole);
+        }
     } else {
         ASSERT(false, "SHOULD NOT BE CALLED FOR THIS KEY!");
     }
@@ -43,62 +49,51 @@ WinMain(HINSTANCE hInstance,
     bResult = GameSystem::Create();
     ASSERT(bResult, "Failed to create GameSystem");
 
-    Scene xScene1;
+    Scene xScene;
+    gpxScene = &xScene;
 
-    Camera xCamera1(xScene1, 0);
+    Camera xCamera1(xScene, 0);
     xCamera1.SetPosition(-1.f, 1.f, -5.f);
-    xScene1.SetActiveCamera(&xCamera1);
+    xScene.SetActiveCamera(&xCamera1);
 
     Matrix3x3 xOri;
     xOri.RotateLocalX(Math::PI * 70.f / 180.f);
     xOri.RotateWorldY(Math::PI * 10.f / 180.f);
 
-    Light xLight1(xScene1, 1);
+    Light xLight1(xScene, 1);
     xLight1.SetOrientation(xOri);
     xLight1.SetAmbientColor({ 0.2f, 0.2f, 0.2f, 1.f });
     xLight1.SetDiffuseColor({ 1.f, 1.f, 1.f, 1.f });
-    xScene1.SetActiveLight(&xLight1);
+    xScene.SetActiveLight(&xLight1);
 
-    StaticObject xObject(xScene1, 2);
+    StaticObject xObject(xScene, 2);
     xObject.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
-    StaticObject xObject2(xScene1, 3);
+    StaticObject xObject2(xScene, 3);
     xObject2.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
     xObject2.SetPosition(Vector3<float>(2.f, 0.f, 0.f));
-    StaticObject xObject3(xScene1, 4);
+    StaticObject xObject3(xScene, 4);
     xObject3.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
     xObject3.SetPosition(Vector3<float>(0.f, 2.f, 0.f));
-    StaticObject xObject4(xScene1, 5);
+    StaticObject xObject4(xScene, 5);
     xObject4.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
     xObject4.SetPosition(Vector3<float>(0.f, 0.f, 2.f));
 
-    ObjectController xController1(xScene1, 6, &xCamera1);
+    ObjectController xController1(xScene, 6, &xCamera1);
 
-    Scene xScene2;
+    Scene xConsoleScene;
+    Camera xConsoleCam(xConsoleScene, 0);
+    xConsoleScene.SetActiveCamera(&xConsoleCam);
+    gpxConsole = &xConsoleScene;
+    Renderable2D xBackground(xConsoleScene, uScreenWidth, uScreenHeight);
+    xBackground.SetTextureHash(GetHash("Textures/Default_White.dds"));
+    xBackground.Init();
+    xBackground.SetPosition(Vector2<int>::ZeroVector(), true);
+    Text xText(xConsoleScene, "CONSOLE SCREEN", GetHash("Default"));
 
-    Camera xCamera2(xScene2, 100);
-    xCamera2.SetPosition(-1.f, 1.f, -5.f);
-    xScene2.SetActiveCamera(&xCamera2);
+    Scene::SetActive(&xConsoleScene);
+    Scene::SetActive(&xScene);
 
-    Light xLight2(xScene2, 101);
-    xLight2.SetOrientation(xOri);
-    xLight2.SetAmbientColor({ 0.2f, 0.2f, 0.2f, 1.f });
-    xLight2.SetDiffuseColor({ 1.f, 0.2f, 0.2f, 1.f });
-    xScene2.SetActiveLight(&xLight2);
-
-    StaticObject xObject__(xScene2, 103);
-    xObject__.InitFromSpecification(SpecificationSystem::GetSpecificationByHash(GetHash("Block")));
-    xObject__.SetPosition(Vector3<float>(2.f, 0.f, 0.f));
-
-    ObjectController xController2(xScene2, 106, &xCamera2);
-
-    Scene::SetActive(&xScene2);
-    Scene::SetActive(&xScene1);
-
-    gapxScenes[0] = &xScene1;
-    gapxScenes[1] = &xScene2;
-
-    InputSystem::RegisterKeyCallback(SwitchToScene, nullptr, KEY_1, UP_MSG);
-    InputSystem::RegisterKeyCallback(SwitchToScene, nullptr, KEY_2, UP_MSG);
+    InputSystem::RegisterKeyCallback(ToggleConsole, nullptr, BACKTICK_KEY, UP_MSG);
 
     ///////////////////////////////////
     // M A I N L O O P
