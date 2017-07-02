@@ -4,6 +4,7 @@
 #include "RenderSystem.h"
 #include "TextureHandler.h"
 #include "Core/Assert.h"
+#include "Graphics/2D/Font.h"
 
 // Static Variables...
 GraphicsSystem* Singleton<GraphicsSystem>::s_pxThis = nullptr;
@@ -42,6 +43,11 @@ GraphicsSystem::Init()
     ASSERT(bResult, "Failed to create the texture handler.");
     if (!bResult) { return false; }
 
+    // Create the fonts
+    bResult = Font::LoadAll();
+    ASSERT(bResult, "Failed to load the fonts.");
+    if (!bResult) { return false; }
+
     return true;
 }
 
@@ -51,6 +57,7 @@ GraphicsSystem::Init()
 void
 GraphicsSystem::Shutdown()
 {
+    Font::ShutdownAll();
     TextureHandler::Destroy();
     RenderSystem::Destroy();
     D3DSystem::Destroy();
