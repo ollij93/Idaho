@@ -164,6 +164,7 @@ public:
     // Statics...
     static LRESULT CALLBACK HandleWindowsMessage(HWND gHWND, UINT uMsg, WPARAM wParam, LPARAM lParam);
     static void Update();
+    static void SetLockMouse(bool bSet) { s_pxThis->m_bLockMouse = bSet; }
 
 private:
     InputSystem()
@@ -171,6 +172,7 @@ private:
         , m_lxKeyCallbacks()
         , m_lxMouseMoveCallbacks()
         , m_lxMouseClickCallbacks()
+        , m_bLockMouse(false)
     {
     }
 
@@ -216,6 +218,8 @@ private:
         }
     };
     std::list<MouseClickCallbackRegister> m_lxMouseClickCallbacks;
+
+    bool m_bLockMouse;
 
     // Singleton
     typedef Singleton<InputSystem> PARENT;
