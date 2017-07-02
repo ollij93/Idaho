@@ -39,6 +39,7 @@ private:
     ID3D11RenderTargetView* m_pxRenderTargetView;
     ID3D11DepthStencilView* m_pxDepthStencilView;
     IDXGISwapChain* m_pxSwapChain;
+    ID3D11BlendState* m_pxAlphaBlendingState;
 
     // Maybe not needed...
     ID3D11Texture2D* m_pxDepthStencilBuffer;

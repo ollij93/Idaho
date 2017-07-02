@@ -20,6 +20,7 @@ D3DSystem::D3DSystem()
 , m_pxRenderTargetView(nullptr)
 , m_pxDepthStencilView(nullptr)
 , m_pxSwapChain(nullptr)
+, m_pxAlphaBlendingState(nullptr)
 , m_pxDepthStencilBuffer(nullptr)
 {
 }
@@ -89,6 +90,10 @@ D3DSystem::Init()
 
     DXGI_SWAP_CHAIN_DESC xSwapChainDesc;
     ZeroMemory(&xSwapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
+
+    D3D11_BLEND_DESC xBlendDesc;
+    ZeroMemory(&xBlendDesc, sizeof(D3D11_BLEND_DESC));
+    const float afBlendFactor[4] = { 0.f, 0.f, 0.f, 0.f };
 
     D3D11_DEPTH_STENCIL_VIEW_DESC xDepthStencilViewDesc;
     ZeroMemory(&xDepthStencilViewDesc, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
@@ -243,6 +248,21 @@ D3DSystem::Init()
     xViewport.TopLeftX = 0.f;
     xViewport.TopLeftY = 0.f;
     m_pxDeviceContext->RSSetViewports(1, &xViewport);
+
+    // Create the alpha enabled blend state
+    xBlendDesc.RenderTarget[0].BlendEnable = TRUE;
+    xBlendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+    xBlendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    xBlendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+    xBlendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    xBlendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+    xBlendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    xBlendDesc.RenderTarget[0].RenderTargetWriteMask = 0x0F;
+
+    hResult = m_pxDevice->CreateBlendState(&xBlendDesc, &m_pxAlphaBlendingState);
+    ASSERT(!FAILED(hResult), "Failed to create the D3D11 alpha enabled blend state.");
+    if (FAILED(hResult)) { return false; }
+    m_pxDeviceContext->OMSetBlendState(m_pxAlphaBlendingState, afBlendFactor, 0xFFFFFFFF);
 
     // Release the back buffer
     pxBackBuffer->Release();
