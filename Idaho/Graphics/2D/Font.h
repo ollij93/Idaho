@@ -1,0 +1,140 @@
+#pragma once
+
+// External Includes...
+#include <list>
+
+// Includes...
+#include "Core/Types.h"
+
+// Forward Declarations...
+class Renderable2D;
+class Scene;
+
+enum FontChars {
+    FONTCHAR_SPACE = 0,
+    FONTCHAR_EXCLAMATION_MARK,
+    FONTCHAR_SPEACH_MARKS,
+    FONTCHAR_HASH,
+    FONTCHAR_DOLAR,
+    FONTCHAR_PERCENTAGE,
+    FONTCHAR_AMPERSAND,
+    FONTCHAR_APOSTROPHE,
+    FONTCHAR_OPEN_BRACKET,
+    FONTCHAR_CLOSE_BRACKET,
+    FONTCHAR_ASTERISK,
+    FONTCHAR_PLUS,
+    FONTCHAR_COMMA,
+    FONTCHAR_HYPHEN,
+    FONTCHAR_FULLSTOP,
+    FONTCHAR_FORWARD_SLASH,
+    FONTCHAR_NUM_0,
+    FONTCHAR_NUM_1,
+    FONTCHAR_NUM_2,
+    FONTCHAR_NUM_3,
+    FONTCHAR_NUM_4,
+    FONTCHAR_NUM_5,
+    FONTCHAR_NUM_6,
+    FONTCHAR_NUM_7,
+    FONTCHAR_NUM_8,
+    FONTCHAR_NUM_9,
+    FONTCHAR_COLON,
+    FONTCHAR_SEMICOLON,
+    FONTCHAR_LESSTHAN,
+    FONTCHAR_EQUALS,
+    FONTCHAR_GREATERTHAN,
+    FONTCHAR_QUESTION_MARK,
+    FONTCHAR_AT,
+    FONTCHAR_UPPER_A,
+    FONTCHAR_UPPER_B,
+    FONTCHAR_UPPER_C,
+    FONTCHAR_UPPER_D,
+    FONTCHAR_UPPER_E,
+    FONTCHAR_UPPER_F,
+    FONTCHAR_UPPER_G,
+    FONTCHAR_UPPER_H,
+    FONTCHAR_UPPER_I,
+    FONTCHAR_UPPER_J,
+    FONTCHAR_UPPER_K,
+    FONTCHAR_UPPER_L,
+    FONTCHAR_UPPER_M,
+    FONTCHAR_UPPER_N,
+    FONTCHAR_UPPER_O,
+    FONTCHAR_UPPER_P,
+    FONTCHAR_UPPER_Q,
+    FONTCHAR_UPPER_R,
+    FONTCHAR_UPPER_S,
+    FONTCHAR_UPPER_T,
+    FONTCHAR_UPPER_U,
+    FONTCHAR_UPPER_V,
+    FONTCHAR_UPPER_W,
+    FONTCHAR_UPPER_X,
+    FONTCHAR_UPPER_Y,
+    FONTCHAR_UPPER_Z,
+    FONTCHAR_SQUARE_OPEN,
+    FONTCHAR_BACK_SLASH,
+    FONTCHAR_SQUARE_CLOSE,
+    FONTCHAR_CARET,
+    FONTCHAR_UNDERSCORE,
+    FONTCHAR_GRAVE,
+    FONTCHAR_LOWER_A,
+    FONTCHAR_LOWER_B,
+    FONTCHAR_LOWER_C,
+    FONTCHAR_LOWER_D,
+    FONTCHAR_LOWER_E,
+    FONTCHAR_LOWER_F,
+    FONTCHAR_LOWER_G,
+    FONTCHAR_LOWER_H,
+    FONTCHAR_LOWER_I,
+    FONTCHAR_LOWER_J,
+    FONTCHAR_LOWER_K,
+    FONTCHAR_LOWER_L,
+    FONTCHAR_LOWER_M,
+    FONTCHAR_LOWER_N,
+    FONTCHAR_LOWER_O,
+    FONTCHAR_LOWER_P,
+    FONTCHAR_LOWER_Q,
+    FONTCHAR_LOWER_R,
+    FONTCHAR_LOWER_S,
+    FONTCHAR_LOWER_T,
+    FONTCHAR_LOWER_U,
+    FONTCHAR_LOWER_V,
+    FONTCHAR_LOWER_W,
+    FONTCHAR_LOWER_X,
+    FONTCHAR_LOWER_Y,
+    FONTCHAR_LOWER_Z,
+    FONTCHAR_CURLY_OPEN,
+    FONTCHAR_VERTICAL_BAR,
+    FONTCHAR_CURLY_CLOSE,
+    FONTCHAR_TILDE,
+
+    NUM_FONTCHARS,
+};
+
+class Font {
+public:
+    Font(const char* pwszFontname);
+    ~Font();
+
+    static bool LoadAll();
+    static void ShutdownAll();
+
+    static const Font* GetFontByHash(Hash uHash);
+    Renderable2D* CreateRenderableForCharacter(char cChar, Scene& xScene) const;
+
+private:
+    void LoadFromFile(const char* pszFilename);
+
+    struct FontCharHandle {
+        float m_fLeft;
+        float m_fRight;
+        u_int m_uWidth;
+    };
+
+    Hash m_uHash;
+    Hash m_uTexHash;
+    u_int m_uHeight;
+    FontCharHandle m_axHandles[NUM_FONTCHARS];
+
+    static std::list<Font*> s_lpxFontList;
+};
+
