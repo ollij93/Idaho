@@ -1,4 +1,5 @@
 // Includes...
+#include "D3DSystem.h"
 #include "RenderSystem.h"
 #include "Core/Assert.h"
 #include "Graphics/Shader/BitMapShader.h"
@@ -52,6 +53,9 @@ RenderSystem::Render()
 {
     bool bResult;
 
+    // 3D: Enable Z Buffer
+    D3DSystem::SetZBufferEnabled(true);
+
     bResult = ColorShader::Render();
     if (!bResult) { return false; }
 
@@ -60,6 +64,9 @@ RenderSystem::Render()
 
     bResult = LightShader::Render();
     if (!bResult) { return false; }
+
+    // 2D: Disable Z Buffer
+    D3DSystem::SetZBufferEnabled(false);
 
     bResult = BitMapShader::Render();
     if (!bResult) { return false; }

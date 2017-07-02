@@ -128,6 +128,8 @@ enum KeyMapping {
     // Unassigned
     NUMLOCK_KEY = 0x90,
     SCROLLLOCK_KEY,
+    // Unassigned
+    BACKTICK_KEY = 0xDF, // This is VK_OEM_8 which apparently varies by keyboard
 };
 enum KeyMessageType {
     ANYKEY_MSG = 0,

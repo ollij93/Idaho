@@ -13,6 +13,8 @@ D3DSystem::D3DSystem()
 , m_pxDepthStencilView(nullptr)
 , m_pxSwapChain(nullptr)
 , m_pxAlphaBlendingState(nullptr)
+, m_pxDepthStencilState(nullptr)
+, m_pxDepthDisabledStencilState(nullptr)
 , m_pxDepthStencilBuffer(nullptr)
 {
 }
@@ -59,6 +61,20 @@ D3DSystem::EndScene()
 }
 
 /*
+ * SetZBufferEnabled : Set whether to use the Z buffer for the next set of rendering
+ */
+void
+D3DSystem::SetZBufferEnabled(bool bSet)
+{
+    if (!s_pxThis) { return; }
+    if (bSet) {
+        s_pxThis->m_pxDeviceContext->OMSetDepthStencilState(s_pxThis->m_pxDepthStencilState, 1);
+    } else {
+        s_pxThis->m_pxDeviceContext->OMSetDepthStencilState(s_pxThis->m_pxDepthDisabledStencilState, 1);
+    }
+}
+
+/*
  * Init : Initialize the instance of the graphics system
  */
 bool
@@ -95,6 +111,12 @@ D3DSystem::Init()
 
     D3D11_VIEWPORT xViewport;
     ZeroMemory(&xViewport, sizeof(D3D11_VIEWPORT));
+
+    D3D11_DEPTH_STENCIL_DESC xDepthStencilDesc;
+    ZeroMemory(&xDepthStencilDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
+
+    D3D11_DEPTH_STENCIL_DESC xDepthDisabledStencilDesc;
+    ZeroMemory(&xDepthDisabledStencilDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
 
     // Create the D3D11 device and device context
     hResult = D3D11CreateDevice(NULL,
@@ -256,6 +278,49 @@ D3DSystem::Init()
     if (FAILED(hResult)) { return false; }
     m_pxDeviceContext->OMSetBlendState(m_pxAlphaBlendingState, afBlendFactor, 0xFFFFFFFF);
 
+    // Set up the description of the depth stencil state.
+    xDepthStencilDesc.DepthEnable = true;
+    xDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+    xDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+    xDepthStencilDesc.StencilEnable = true;
+    xDepthStencilDesc.StencilReadMask = 0xFF;
+    xDepthStencilDesc.StencilWriteMask = 0xFF;
+    xDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    xDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+    xDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    xDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+    xDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    xDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+    xDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    xDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+    // Create the depth stencil state.
+    hResult = m_pxDevice->CreateDepthStencilState(&xDepthStencilDesc, &m_pxDepthStencilState);
+    ASSERT(!FAILED(hResult), "Failed to create the D3D11 depth stencil state.");
+    if (FAILED(hResult)) { return false; }
+
+    // Now create a second depth stencil state which turns off the Z buffer for 2D rendering. The only difference is
+    // that DepthEnabled is set to false, all other parameters are the same as the other depth stencil state.
+    xDepthDisabledStencilDesc.DepthEnable = false;
+    xDepthDisabledStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+    xDepthDisabledStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+    xDepthDisabledStencilDesc.StencilEnable = true;
+    xDepthDisabledStencilDesc.StencilReadMask = 0xFF;
+    xDepthDisabledStencilDesc.StencilWriteMask = 0xFF;
+    xDepthDisabledStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    xDepthDisabledStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+    xDepthDisabledStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    xDepthDisabledStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+    xDepthDisabledStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    xDepthDisabledStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+    xDepthDisabledStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    xDepthDisabledStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+    // Create the state using the device.
+    hResult = m_pxDevice->CreateDepthStencilState(&xDepthDisabledStencilDesc, &m_pxDepthDisabledStencilState);
+    ASSERT(!FAILED(hResult), "Failed to create the D3D11 depth disabled stencil state.");
+    if (FAILED(hResult)) { return false; }
+
     // Release the back buffer
     pxBackBuffer->Release();
     pxBackBuffer = nullptr;
@@ -271,6 +336,10 @@ D3DSystem::Shutdown()
 {
     if (m_pxSwapChain) {
         m_pxSwapChain->SetFullscreenState(false, NULL);
+    }
+    if (m_pxAlphaBlendingState) {
+        m_pxAlphaBlendingState->Release();
+        m_pxAlphaBlendingState = nullptr;
     }
     if (m_pxDepthStencilView) {
         m_pxDepthStencilView->Release();
