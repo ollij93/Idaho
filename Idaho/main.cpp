@@ -3,6 +3,7 @@
 #include "GameSystem.h"
 
 #include "Scene.h"
+#include "Graphics/2D/GUIElement.h"
 #include "Graphics/2D/Renderable2D.h"
 #include "Graphics/2D/Text.h"
 #include "Objects/Camera.h"
@@ -52,6 +53,8 @@ WinMain(HINSTANCE hInstance,
     Scene xScene;
     gpxScene = &xScene;
 
+    xScene.SetTrapCursor(true);
+
     Camera xCamera1(xScene, 0);
     xCamera1.SetPosition(-1.f, 1.f, -5.f);
     xScene.SetActiveCamera(&xCamera1);
@@ -87,8 +90,14 @@ WinMain(HINSTANCE hInstance,
     Renderable2D xBackground(xConsoleScene, uScreenWidth, uScreenHeight);
     xBackground.SetTextureHash(GetHash("Textures/Default_White.dds"));
     xBackground.Init();
-    xBackground.SetPosition(Vector2<int>::ZeroVector(), true);
-    Text xText(xConsoleScene, "CONSOLE SCREEN", GetHash("Default"));
+    xBackground.SetPosition(Vector2<int>::ZeroVector());
+    Renderable2D* pxGUIImage = new Renderable2D(xConsoleScene, 160, 30);
+    pxGUIImage->SetTextureHash(GetHash("Textures/Default_Mauve.dds"));
+    pxGUIImage->Init();
+    Text* pxGUIText = new Text(xConsoleScene, "GUI TEXT", GetHash("Default"));
+    GUIElement xGUIEle;
+    xGUIEle.SetImage(pxGUIImage, Vector2<int>::ZeroVector());
+    xGUIEle.SetText(pxGUIText, Vector2<int>(10, 10));
 
     Scene::SetActive(&xConsoleScene);
     Scene::SetActive(&xScene);

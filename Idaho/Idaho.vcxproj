@@ -175,6 +175,7 @@
     <ClCompile Include="..\TinyXML\tinyxml2.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="Graphics\2D\Font.cpp" />
+    <ClCompile Include="Graphics\2D\GUIElement.cpp" />
     <ClCompile Include="Graphics\2D\Renderable2D.cpp" />
     <ClCompile Include="Graphics\2D\Text.cpp" />
     <ClCompile Include="Graphics\D3DSystem.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="Core\Types.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="Graphics\2D\Font.h" />
+    <ClInclude Include="Graphics\2D\GUIElement.h" />
     <ClInclude Include="Graphics\2D\Renderable2D.h" />
     <ClInclude Include="Graphics\2D\Text.h" />
     <ClInclude Include="Graphics\D3DSystem.h" />

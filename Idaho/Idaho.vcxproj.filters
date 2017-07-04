@@ -292,8 +292,13 @@
     <ClCompile Include="Graphics\2D\Font.cpp">
       <Filter>Graphics\2D</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\2D\Text.cpp" />
     <ClCompile Include="WindowManager.cpp" />
+    <ClCompile Include="Graphics\2D\Text.cpp">
+      <Filter>Graphics\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\2D\GUIElement.cpp">
+      <Filter>Graphics\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -579,8 +584,13 @@
     <ClInclude Include="Graphics\2D\Font.h">
       <Filter>Graphics\2D</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\2D\Text.h" />
     <ClInclude Include="WindowManager.h" />
+    <ClInclude Include="Graphics\2D\Text.h">
+      <Filter>Graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\2D\GUIElement.h">
+      <Filter>Graphics\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">
