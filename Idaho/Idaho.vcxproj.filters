@@ -43,6 +43,9 @@
     <Filter Include="Graphics\2D">
       <UniqueIdentifier>{f90c8896-76f2-4891-8597-5eabc52b3b4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{4ea336ed-3008-45a3-aa91-fa81cd17ea58}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -294,6 +297,7 @@
     </ClCompile>
     <ClCompile Include="Graphics\2D\Text.cpp" />
     <ClCompile Include="WindowManager.cpp" />
+    <ClCompile Include="LoadSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -581,6 +585,7 @@
     </ClInclude>
     <ClInclude Include="Graphics\2D\Text.h" />
     <ClInclude Include="WindowManager.h" />
+    <ClInclude Include="LoadSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">
@@ -601,5 +606,16 @@
     <FxCompile Include="Graphics\Shader\PS\LightPixelShader.hlsl">
       <Filter>Graphics\Shader\PS</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Scenes\Console.xml">
+      <Filter>Scenes</Filter>
+    </Xml>
+    <Xml Include="Scenes\Main.xml">
+      <Filter>Scenes</Filter>
+    </Xml>
+    <Xml Include="Scenes\Title.xml">
+      <Filter>Scenes</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

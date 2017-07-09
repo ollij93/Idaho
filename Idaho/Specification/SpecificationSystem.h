@@ -19,7 +19,7 @@ protected:
     virtual void Shutdown() override;
 
 private:
-    void SpecificationSystem::LoadSpecsFromFile(const char* pszFilename);
+    static bool LoadSpecsFromFile(FILE* pxFile);
     std::vector<Specification*> m_vxSpecifications;
 
     friend Singleton<SpecificationSystem>;

@@ -6,6 +6,7 @@
 #include "TextureHandler.h"
 #include "Core/Assert.h"
 #include "Graphics/D3DSystem.h"
+#include "LoadSystem.h"
 
 #define MAX_TEXTURE_FILENAME_SIZE 256
 
@@ -16,37 +17,7 @@ bool
 TextureHandler::Init()
 {
     // Find all textures in the directory and load them in.
-    wchar_t awcFilename[MAX_TEXTURE_FILENAME_SIZE];
-    errno_t iErrno;
-    WIN32_FIND_DATAW xFindData;
-    TextureHandle xHandle;
-    HANDLE hFile = FindFirstFileW(L"Textures/*.dds", &xFindData);
-    ASSERT(hFile != INVALID_HANDLE_VALUE, "Failed to find any textures to load.");
-    if (hFile == INVALID_HANDLE_VALUE) { return false; }
-
-    do {
-        if (!(xFindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-            iErrno = wcscpy_s(awcFilename, MAX_TEXTURE_FILENAME_SIZE, L"Textures/");
-            if (!iErrno) {
-                iErrno = wcscat_s(awcFilename, MAX_TEXTURE_FILENAME_SIZE, xFindData.cFileName);
-            }
-            ASSERT(!iErrno, "Failed to copy texture filename to buffer. Filename too long?");
-            if (iErrno) { return false; }
-
-            HRESULT hResult = DirectX::CreateDDSTextureFromFile(D3DSystem::GetDevice(),
-                awcFilename,
-                NULL,
-                &(xHandle.m_pxTexture));
-            ASSERT(!FAILED(hResult), "Failed to load a texture from file.");
-            if (FAILED(hResult)) { return false; }
-
-            xHandle.m_uHash = GetHash(awcFilename);
-            m_vxTextures.push_back(xHandle);
-        }
-    } while (FindNextFileW(hFile, &xFindData));
-    FindClose(hFile);
-
-    return true;
+    return LoadSystem::ForFileInDir("Textures", "dds", LoadTextureFromFile);
 }
 
 void
@@ -73,4 +44,23 @@ TextureHandler::GetTextureByHash(Hash uHash)
         }
     }
     return nullptr;
+}
+
+bool
+TextureHandler::LoadTextureFromFile(const char* pszFilename)
+{
+    TextureHandle xHandle;
+    WCHAR* pwszFilename = new WCHAR[MAX_FILENAME_SIZE];
+    mbstowcs_s(nullptr, pwszFilename, MAX_FILENAME_SIZE, pszFilename, MAX_FILENAME_SIZE);
+
+    HRESULT hResult = DirectX::CreateDDSTextureFromFile(D3DSystem::GetDevice(),
+        pwszFilename,
+        nullptr,
+        &(xHandle.m_pxTexture));
+    ASSERT(!FAILED(hResult), "Failed to load a texture from file.");
+    if (FAILED(hResult)) { return false; }
+
+    xHandle.m_uHash = GetHash(pszFilename);
+    s_pxThis->m_vxTextures.push_back(xHandle);
+    return true;
 }

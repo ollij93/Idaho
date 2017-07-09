@@ -29,6 +29,8 @@ protected:
     virtual bool Init() override;
     virtual void Shutdown() override;
 private:
+    static bool LoadTextureFromFile(const char* pszFilename);
+
     std::vector<TextureHandle> m_vxTextures;
     friend Singleton<TextureHandler>;
 };

@@ -38,6 +38,8 @@ distribution.
 #   include <cstring>
 #endif
 
+#include "Core/Types.h"
+
 /*
    TODO: intern strings instead of allocation.
 */
@@ -1230,6 +1232,11 @@ public:
         float f=0;
         QueryFloatAttribute( name, &f );
         return f;
+    }
+
+    Hash HashAttribute(const char* pszName) const {
+        const char* pszAttribute = Attribute(pszName);
+        return GetHash(pszAttribute);
     }
 
     /** Given an attribute name, QueryIntAttribute() returns
