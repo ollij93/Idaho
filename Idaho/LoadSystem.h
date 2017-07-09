@@ -13,6 +13,7 @@
 
 // Forward Declarations...
 class Camera;
+class GUIElement;
 class Light;
 class Renderable2D;
 class Scene;
@@ -26,7 +27,7 @@ public:
     static FILE* GetFileInDir(const char* pszDir, Hash uFileHash);
 
 public:
-    template<class T> static void AddToSceneFromElement(tinyxml2::XMLElement* pxElement, Scene* pxScene);
+    template<class T> static T* AddToSceneFromElement(tinyxml2::XMLElement* pxElement, Scene* pxScene);
     template<class T> static T* CreateFromElement(tinyxml2::XMLElement* pxElement);
     template<class T> static T GetFromElement(tinyxml2::XMLElement* pxElement);
 
@@ -41,8 +42,9 @@ private:
 template<> static Vector2<int> LoadSystem::GetFromElement<Vector2<int>>(tinyxml2::XMLElement* pxElement);
 template<> static Vector3<float> LoadSystem::GetFromElement<Vector3<float>>(tinyxml2::XMLElement* pxElement);
 template<> static Scene* LoadSystem::CreateFromElement<Scene>(tinyxml2::XMLElement* pxElement);
-template<> static void LoadSystem::AddToSceneFromElement<Camera>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
-template<> static void LoadSystem::AddToSceneFromElement<Light>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
-template<> static void LoadSystem::AddToSceneFromElement<Renderable2D>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
-template<> static void LoadSystem::AddToSceneFromElement<StaticObject>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
-template<> static void LoadSystem::AddToSceneFromElement<Text>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
+template<> static Camera* LoadSystem::AddToSceneFromElement<Camera>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
+template<> static GUIElement* LoadSystem::AddToSceneFromElement<GUIElement>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
+template<> static Light* LoadSystem::AddToSceneFromElement<Light>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
+template<> static Renderable2D* LoadSystem::AddToSceneFromElement<Renderable2D>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
+template<> static StaticObject* LoadSystem::AddToSceneFromElement<StaticObject>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
+template<> static Text* LoadSystem::AddToSceneFromElement<Text>(tinyxml2::XMLElement* pxElement, Scene* pxScene);

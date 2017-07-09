@@ -2,6 +2,28 @@
 #include "Text.h"
 #include "Graphics/2D/Font.h"
 #include "Graphics/2D/Renderable2D.h"
+#include "LoadSystem.h"
+
+template<> Text*
+LoadSystem::AddToSceneFromElement<Text>(tinyxml2::XMLElement* pxElement, Scene* pxScene)
+{
+    Hash uFontHash = pxElement->HashAttribute("font");
+    tinyxml2::XMLElement* pxStringElement = pxElement->FirstChildElement("String");
+    tinyxml2::XMLElement* pxPosElement = pxElement->FirstChildElement("Position");
+    const char* pszString = nullptr;
+    if (pxStringElement) {
+        pszString = pxStringElement->GetText();
+    }
+
+    Text* pxText = new Text(*pxScene, pszString, uFontHash);
+
+    if (pxPosElement) {
+        Vector2<int> xPos = GetFromElement<Vector2<int>>(pxPosElement);
+        pxText->SetPosition(xPos);
+    }
+
+    return pxText;
+}
 
 Text::Text(Scene& xScene, const char* pszString, Hash uFontHash)
 {
@@ -35,6 +57,7 @@ Text::~Text()
 void
 Text::SetPosition(Vector2<int> xPos, bool bCentred /* = false */)
 {
+    PARENT::SetPosition(xPos);
     std::list<Renderable2D*>::const_iterator xIter;
 
     if (m_lpxRenderables.size() == 0) { return; }

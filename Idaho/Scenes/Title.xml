@@ -1,14 +1,27 @@
 <?xml version="1.0"?>
 <Scene id="0" name="Default" trapMouse="0">
-    <Camera active="1">
-    </Camera>
-    <Light active="1">
-    </Light>
+  <Camera active="1">
+  </Camera>
+  <Light active="1">
+  </Light>
+  <GUIElement>
     <Image texture="Textures/Background.dds">
         <Size x="1067" y="600"/>
     </Image>
+  </GUIElement>
+  <GUIElement>
+    <Position x="50" y="50"/>
     <Text font="Default">
         <String>This is the Title Screen</String>
-        <Position x="50" y="50"/>
     </Text>
+    <GUIElement>
+      <Offset x="0" y="20"/>
+      <Text font="Default">
+        <String>This is the Sub-title</String>
+      </Text>
+      <Image texture="Textures/Default_Mauve.dds">
+        <Size x="300" y="20"/>
+      </Image>
+    </GUIElement>
+  </GUIElement>
 </Scene>

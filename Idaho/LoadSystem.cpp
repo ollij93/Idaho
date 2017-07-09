@@ -6,11 +6,10 @@
 #include "LoadSystem.h"
 #include "Core/Assert.h"
 #include "Scene.h"
-#include "Graphics/2D/Renderable2D.h"
-#include "Graphics/2D/Text.h"
 #include "Objects/Camera.h"
 #include "Objects/Light.h"
 #include "Objects/StaticObject.h"
+#include "UI/GUIElement.h"
 
 // Statics...
 LoadSystem* Singleton<LoadSystem>::s_pxThis = nullptr;
@@ -218,18 +217,11 @@ LoadSystem::CreateFromElement<Scene>(tinyxml2::XMLElement* pxElement)
         AddToSceneFromElement<Light>(pxLightElement, pxNewScene);
     }
 
-    // Load Images
-    for (tinyxml2::XMLElement* pxImageElement = pxElement->FirstChildElement("Image");
-        pxImageElement;
-        pxImageElement = pxImageElement->NextSiblingElement("Image")) {
-        AddToSceneFromElement<Renderable2D>(pxImageElement, pxNewScene);
-    }
-
-    // Load any Text
-    for (tinyxml2::XMLElement* pxTextElement = pxElement->FirstChildElement("Text");
-        pxTextElement;
-        pxTextElement = pxTextElement->NextSiblingElement("Text")) {
-        AddToSceneFromElement<Text>(pxTextElement, pxNewScene);
+    // Load GUI Elements
+    for (tinyxml2::XMLElement* pxGUIElement = pxElement->FirstChildElement("GUIElement");
+        pxGUIElement;
+        pxGUIElement = pxGUIElement->NextSiblingElement("GUIElement")) {
+        AddToSceneFromElement<GUIElement>(pxGUIElement, pxNewScene);
     }
 
     // Load Static Objects
@@ -288,7 +280,7 @@ LoadSystem::GetFromElement<Matrix3x3>(tinyxml2::XMLElement* pxElement)
     return xMat;
 }
 
-template<> void
+template<> Camera*
 LoadSystem::AddToSceneFromElement<Camera>(tinyxml2::XMLElement* pxElement, Scene* pxScene)
 {
     tinyxml2::XMLElement* pxPosElement = pxElement->FirstChildElement("Position");
@@ -310,9 +302,11 @@ LoadSystem::AddToSceneFromElement<Camera>(tinyxml2::XMLElement* pxElement, Scene
     if (pxElement->BoolAttribute("active")) {
         pxScene->SetActiveCamera(pxCamera);
     }
+
+    return pxCamera;
 }
 
-template<> void
+template<> Light*
 LoadSystem::AddToSceneFromElement<Light>(tinyxml2::XMLElement* pxElement, Scene* pxScene)
 {
     tinyxml2::XMLElement* pxPosElement = pxElement->FirstChildElement("Position");
@@ -344,30 +338,11 @@ LoadSystem::AddToSceneFromElement<Light>(tinyxml2::XMLElement* pxElement, Scene*
     if (pxElement->BoolAttribute("active")) {
         pxScene->SetActiveLight(pxLight);
     }
+
+    return pxLight;
 }
 
-template<> void
-LoadSystem::AddToSceneFromElement<Renderable2D>(tinyxml2::XMLElement* pxElement, Scene* pxScene)
-{
-    tinyxml2::XMLElement* pxSizeElement = pxElement->FirstChildElement("Size");
-    tinyxml2::XMLElement* pxPosElement = pxElement->FirstChildElement("Position");
-
-    ASSERT(pxSizeElement, "Image element without Size child.");
-    if (!pxSizeElement) { return; }
-
-    Vector2<int> xSize = GetFromElement<Vector2<int>>(pxSizeElement);
-
-    Renderable2D* pxRenderable = new Renderable2D(*pxScene, xSize.x, xSize.y);
-    pxRenderable->SetTextureHash(pxElement->HashAttribute("texture"));
-    pxRenderable->Init();
-
-    if (pxPosElement) {
-        Vector2<int> xPos = GetFromElement<Vector2<int>>(pxPosElement);
-        pxRenderable->SetPosition(xPos);
-    }
-}
-
-template<> void
+template<> StaticObject*
 LoadSystem::AddToSceneFromElement<StaticObject>(tinyxml2::XMLElement* pxElement, Scene* pxScene)
 {
     tinyxml2::XMLElement* pxPosElement = pxElement->FirstChildElement("Position");
@@ -380,23 +355,6 @@ LoadSystem::AddToSceneFromElement<StaticObject>(tinyxml2::XMLElement* pxElement,
         Vector3<float> xPos = GetFromElement<Vector3<float>>(pxPosElement);
         pxNewObject->SetPosition(xPos);
     }
-}
 
-template<> void
-LoadSystem::AddToSceneFromElement<Text>(tinyxml2::XMLElement* pxElement, Scene* pxScene)
-{
-    Hash uFontHash = pxElement->HashAttribute("font");
-    tinyxml2::XMLElement* pxStringElement = pxElement->FirstChildElement("String");
-    tinyxml2::XMLElement* pxPosElement = pxElement->FirstChildElement("Position");
-    const char* pszString = nullptr;
-    if (pxStringElement) {
-        pszString = pxStringElement->GetText();
-    }
-
-    Text* pxText = new Text(*pxScene, pszString, uFontHash);
-
-    if (pxPosElement) {
-        Vector2<int> xPos = GetFromElement<Vector2<int>>(pxPosElement);
-        pxText->SetPosition(xPos);
-    }
+    return pxNewObject;
 }
