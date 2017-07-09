@@ -46,6 +46,12 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{4ea336ed-3008-45a3-aa91-fa81cd17ea58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Lua">
+      <UniqueIdentifier>{4b2bde6c-e0b9-45e5-acf3-9b133e59e08b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{5bba0375-49b2-4550-beb7-a187accebf96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -295,9 +301,117 @@
     <ClCompile Include="Graphics\2D\Font.cpp">
       <Filter>Graphics\2D</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\2D\Text.cpp" />
     <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="LoadSystem.cpp" />
+    <ClCompile Include="LuaConsole.cpp" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lapi.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lauxlib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lbaselib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lbitlib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lcode.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lcorolib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lctype.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ldblib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ldebug.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ldo.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ldump.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lfunc.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lgc.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\linit.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\liolib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\llex.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lmathlib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lmem.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\loadlib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lobject.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lopcodes.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\loslib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lparser.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lstate.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lstring.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lstrlib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ltable.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ltablib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ltm.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lundump.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lutf8lib.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lvm.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lzio.c">
+      <Filter>Component\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\2D\Text.cpp">
+      <Filter>Graphics\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\GUIElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\TextInput.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -583,9 +697,99 @@
     <ClInclude Include="Graphics\2D\Font.h">
       <Filter>Graphics\2D</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\2D\Text.h" />
     <ClInclude Include="WindowManager.h" />
     <ClInclude Include="LoadSystem.h" />
+    <ClInclude Include="LuaConsole.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lua.hpp">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lauxlib.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lua.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lualib.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lapi.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lcode.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lctype.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\ldebug.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\ldo.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lfunc.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lgc.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\llex.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\llimits.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lmem.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lobject.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lopcodes.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lparser.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lprefix.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lstate.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lstring.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\ltable.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\ltm.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\luaconf.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lundump.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lvm.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lzio.h">
+      <Filter>Component\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\2D\Text.h">
+      <Filter>Graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GUIElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\TextInput.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Object2D.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">

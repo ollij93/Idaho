@@ -1,5 +1,29 @@
 // Includes...
 #include "Renderable2D.h"
+#include "LoadSystem.h"
+
+template<> Renderable2D*
+LoadSystem::AddToSceneFromElement<Renderable2D>(tinyxml2::XMLElement* pxElement, Scene* pxScene)
+{
+    tinyxml2::XMLElement* pxSizeElement = pxElement->FirstChildElement("Size");
+    tinyxml2::XMLElement* pxPosElement = pxElement->FirstChildElement("Position");
+
+    ASSERT(pxSizeElement, "Image element without Size child.");
+    if (!pxSizeElement) { return nullptr; }
+
+    Vector2<int> xSize = GetFromElement<Vector2<int>>(pxSizeElement);
+
+    Renderable2D* pxRenderable = new Renderable2D(*pxScene, xSize.x, xSize.y);
+    pxRenderable->SetTextureHash(pxElement->HashAttribute("texture"));
+    pxRenderable->Init();
+
+    if (pxPosElement) {
+        Vector2<int> xPos = GetFromElement<Vector2<int>>(pxPosElement);
+        pxRenderable->SetPosition(xPos);
+    }
+
+    return pxRenderable;
+}
 
 bool
 Renderable2D::Init()

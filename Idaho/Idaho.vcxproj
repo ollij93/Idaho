@@ -114,6 +114,39 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.cpp" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lapi.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lauxlib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lbaselib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lbitlib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lcode.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lcorolib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lctype.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ldblib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ldebug.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ldo.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ldump.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lfunc.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lgc.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\linit.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\liolib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\llex.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lmathlib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lmem.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\loadlib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lobject.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lopcodes.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\loslib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lparser.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lstate.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lstring.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lstrlib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ltable.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ltablib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\ltm.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lundump.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lutf8lib.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lvm.c" />
+    <ClCompile Include="..\Lua\lua-5.3.4\src\lzio.c" />
     <ClCompile Include="..\ReactPhysics3D\body\Body.cpp" />
     <ClCompile Include="..\ReactPhysics3D\body\CollisionBody.cpp" />
     <ClCompile Include="..\ReactPhysics3D\body\RigidBody.cpp" />
@@ -190,6 +223,7 @@
     <ClCompile Include="Graphics\TextureHandler.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="LoadSystem.cpp" />
+    <ClCompile Include="LuaConsole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Entity\ObjectController.cpp" />
@@ -200,10 +234,38 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Specification\Specification.cpp" />
     <ClCompile Include="Specification\SpecificationSystem.cpp" />
+    <ClCompile Include="UI\GUIElement.cpp" />
+    <ClCompile Include="UI\TextInput.cpp" />
     <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DirectX\DDSTextureLoader\DDSTextureLoader.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lapi.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lauxlib.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lcode.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lctype.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\ldebug.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\ldo.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lfunc.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lgc.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\llex.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\llimits.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lmem.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lobject.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lopcodes.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lparser.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lprefix.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lstate.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lstring.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\ltable.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\ltm.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lua.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lua.hpp" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\luaconf.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lualib.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lundump.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lvm.h" />
+    <ClInclude Include="..\Lua\lua-5.3.4\src\lzio.h" />
     <ClInclude Include="..\ReactPhysics3D\body\Body.h" />
     <ClInclude Include="..\ReactPhysics3D\body\CollisionBody.h" />
     <ClInclude Include="..\ReactPhysics3D\body\RigidBody.h" />
@@ -292,6 +354,7 @@
     <ClInclude Include="Graphics\TextureHandler.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="LoadSystem.h" />
+    <ClInclude Include="LuaConsole.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Entity\ObjectController.h" />
     <ClInclude Include="Objects\Entity\Entity.h" />
@@ -302,6 +365,9 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Specification\Specification.h" />
     <ClInclude Include="Specification\SpecificationSystem.h" />
+    <ClInclude Include="UI\GUIElement.h" />
+    <ClInclude Include="UI\Object2D.h" />
+    <ClInclude Include="UI\TextInput.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
