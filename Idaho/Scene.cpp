@@ -1,10 +1,12 @@
 // Includes...
 #include "Scene.h"
 #include "InputSystem.h"
+#include "LoadSystem.h"
 #include "Objects/Entity/Entity.h"
 
 // Statics...
 Scene* Scene::s_pxActive = nullptr;
+std::unordered_map<int, Scene*> Scene::s_impxScenes;
 
 /*
  * ProcessUpdates : Run the updates for the entities in the scene
@@ -19,6 +21,25 @@ Scene::ProcessUpdates(float fTimestep)
             pxEntity->Update(fTimestep);
         }
     }
+}
+
+bool
+Scene::LoadFromFile(FILE* pxFile)
+{
+    tinyxml2::XMLDocument xDoc;
+    xDoc.LoadFile(pxFile);
+
+    for (tinyxml2::XMLElement* pxSceneElement = xDoc.FirstChildElement("Scene");
+        pxSceneElement;
+        pxSceneElement = pxSceneElement->NextSiblingElement("Scene")) {
+        Scene* pxScene = LoadSystem::CreateFromElement<Scene>(pxSceneElement);
+        if (pxScene) {
+            s_impxScenes[pxScene->m_uID] = pxScene;
+            pxScene->Deactivate();
+        }
+    }
+
+    return true;
 }
 
 void

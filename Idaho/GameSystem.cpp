@@ -1,6 +1,7 @@
 // Includes...
 #include "GameSystem.h"
 #include "InputSystem.h"
+#include "LoadSystem.h"
 #include "Scene.h"
 #include "Core/Assert.h"
 #include "Graphics/GraphicsSystem.h"
@@ -60,6 +61,12 @@ GameSystem::Init()
     bResult = GraphicsSystem::Create();
     ASSERT(bResult, "Failed to create the graphics system");
     if (!bResult) { return false; }
+
+    // Load the scenes and go to scene 0
+    bResult = LoadSystem::ForFileInDir("Scenes", "xml", Scene::LoadFromFile);
+    ASSERT(bResult, "Failed to create the graphics system");
+    if (!bResult) { return false; }
+    Scene::SwitchToScene(0);
 
     // Initialize the update time
     m_lUpdateTime = clock();

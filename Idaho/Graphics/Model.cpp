@@ -4,6 +4,7 @@
 
 // Includes...
 #include "Model.h"
+#include "LoadSystem.h"
 #include "Core/Assert.h"
 #include "Core/Math.h"
 #include "Graphics/Shader/LightShader.h"
@@ -17,13 +18,15 @@ Model::Init()
     ASSERT(m_uModelHash != uHASH_UNSET, "Attempting to init a model before the model hash has been set.");
     if (m_uModelHash == uHASH_UNSET) { return false; }
 
-    bool bFound = false;
-    errno_t iErrno;
-    WIN32_FIND_DATA xFindData;
-    HANDLE hFile;
-    char acFilename[MAX_MODEL_FILENAME_SIZE];
+    // Search the Models directory for obj file to be loaded
+    FILE* pxFile;
+    pxFile = LoadSystem::GetFileInDir("Models", m_uModelHash);
+    ASSERT(pxFile, "Failed to find the model for the given hash");
+    if (!pxFile) { return false; }
 
-    std::ifstream xIFStream;
+    std::ifstream xIFStream(pxFile);
+    ASSERT(!xIFStream.fail(), "Failed to open the file found for the model");
+    if (xIFStream.fail()) { return false; }
     char acInput[MAX_MODEL_LINE_LENGTH];
 
     struct FaceInfo {
@@ -36,36 +39,7 @@ Model::Init()
     std::vector<Vector3<float>> vxNormals;
     std::vector<FaceInfo> vxFaces;
 
-
-    // Search the Models directory for obj files to be loaded, hash the filenames and find the one that matches
-    hFile = FindFirstFile("Models/*.obj", &xFindData);
-    ASSERT(hFile != INVALID_HANDLE_VALUE, "Failed to find files in the Models/ directory");
-    if (hFile == INVALID_HANDLE_VALUE) { return false; }
-
-    do {
-        if (!(xFindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-            iErrno = strcpy_s(acFilename, MAX_MODEL_FILENAME_SIZE, "Models/");
-            if (!iErrno) {
-                iErrno = strcat_s(acFilename, MAX_MODEL_FILENAME_SIZE, xFindData.cFileName);
-            }
-            ASSERT(!iErrno, "Failed to copy model filename to buffer. Filename too long?");
-            if (iErrno) { return false; }
-
-            if (GetHash(acFilename) == m_uModelHash) {
-                bFound = true;
-            }
-        }
-    } while (!bFound && FindNextFile(hFile, &xFindData));
-    FindClose(hFile);
-
-    ASSERT(bFound, "Failed to find the model for the given filename");
-    if (!bFound) { return false; }
-
     // Open the file and parse its contents
-    xIFStream.open(acFilename);
-    ASSERT(!xIFStream.fail(), "Failed to open the file found for the model");
-    if (xIFStream.fail()) { return false; }
-
     xIFStream.getline(acInput, MAX_MODEL_LINE_LENGTH);
     while (!xIFStream.eof()) {
         if (strncmp(acInput, "v ", 2) == 0) {

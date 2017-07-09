@@ -5,6 +5,7 @@
 #include "SpecificationSystem.h"
 #include "Specification.h"
 #include "Core/Assert.h"
+#include "LoadSystem.h"
 
 #define MAX_SPEC_FILENAME_SIZE 256
 
@@ -31,28 +32,7 @@ SpecificationSystem::GetSpecificationByHash(Hash uHash)
 bool
 SpecificationSystem::Init()
 {
-    char acFilename[MAX_SPEC_FILENAME_SIZE];
-    errno_t iErrno;
-    WIN32_FIND_DATA xFindData;
-    HANDLE hFile = FindFirstFile("Specs/*.spec", &xFindData);
-    ASSERT(hFile != INVALID_HANDLE_VALUE, "Failed to find any spec files to load");
-    if (hFile == INVALID_HANDLE_VALUE) { return false; }
-
-    do {
-        if (!(xFindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-            iErrno = strcpy_s(acFilename, MAX_SPEC_FILENAME_SIZE, "Specs/");
-            if (!iErrno) {
-                iErrno = strcat_s(acFilename, MAX_SPEC_FILENAME_SIZE, xFindData.cFileName);
-            }
-            ASSERT(!iErrno, "Failed to copy specification filename to buffer. Filename too long?");
-            if (iErrno) { return false; }
-
-            LoadSpecsFromFile(acFilename);
-        }
-    } while (FindNextFile(hFile, &xFindData));
-    FindClose(hFile);
-
-    return true;
+    return LoadSystem::ForFileInDir("Specs", ".spec", LoadSpecsFromFile);
 }
 
 void
@@ -68,17 +48,12 @@ SpecificationSystem::Shutdown()
     }
 }
 
-void
-SpecificationSystem::LoadSpecsFromFile(const char* pszFilename)
+bool
+SpecificationSystem::LoadSpecsFromFile(FILE* pxFile)
 {
     tinyxml2::XMLDocument xSpecDoc;
     tinyxml2::XMLElement* pxSpecElement;
     Specification* pxNewSpec;
-    FILE* pxFile;
-
-    fopen_s(&pxFile, pszFilename, "rb");
-    ASSERT(pxFile, "Failed to open file for loading specifications.");
-    if (!pxFile) { return; }
 
     xSpecDoc.LoadFile(pxFile);
 
@@ -88,7 +63,7 @@ SpecificationSystem::LoadSpecsFromFile(const char* pszFilename)
         pxNewSpec = new Specification;
         bLoadSuccess = pxNewSpec->LoadParamsFromElement(pxSpecElement);
         if (bLoadSuccess) {
-            m_vxSpecifications.push_back(pxNewSpec);
+            s_pxThis->m_vxSpecifications.push_back(pxNewSpec);
         } else {
             delete pxNewSpec;
             pxNewSpec = nullptr;
@@ -98,4 +73,6 @@ SpecificationSystem::LoadSpecsFromFile(const char* pszFilename)
     }
 
     fclose(pxFile);
+
+    return true;
 }

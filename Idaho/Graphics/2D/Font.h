@@ -112,7 +112,7 @@ enum FontChars {
 
 class Font {
 public:
-    Font(const char* pwszFontname);
+    Font();
     ~Font();
 
     static bool LoadAll();
@@ -122,7 +122,7 @@ public:
     Renderable2D* CreateRenderableForCharacter(char cChar, Scene& xScene) const;
 
 private:
-    void LoadFromFile(const char* pszFilename);
+    static bool CreateFromFile(FILE* pxFile);
 
     struct FontCharHandle {
         float m_fLeft;

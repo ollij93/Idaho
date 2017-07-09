@@ -189,6 +189,7 @@
     <ClCompile Include="Graphics\Shader\TextureShader.cpp" />
     <ClCompile Include="Graphics\TextureHandler.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="LoadSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Entity\ObjectController.cpp" />
@@ -290,6 +291,7 @@
     <ClInclude Include="Graphics\Shader\TextureShader.h" />
     <ClInclude Include="Graphics\TextureHandler.h" />
     <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="LoadSystem.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Entity\ObjectController.h" />
     <ClInclude Include="Objects\Entity\Entity.h" />
@@ -333,6 +335,11 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Scenes\Console.xml" />
+    <Xml Include="Scenes\Main.xml" />
+    <Xml Include="Scenes\Title.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

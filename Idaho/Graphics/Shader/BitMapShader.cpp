@@ -19,9 +19,9 @@ BitMapShader::GetProjectionMatrix(DirectX::XMMATRIX& xProjectionMatrix)
 void
 BitMapShader::GetViewMatrix(DirectX::XMMATRIX& xViewMatrix)
 {
-    DirectX::XMVECTOR xPos = DirectX::XMVectorSet(0.f, 0.f, -1.f, 0.f);
+    DirectX::XMVECTOR xPos = DirectX::XMVectorSet(WindowManager::GetScreenWidth()/2.f, WindowManager::GetScreenHeight()/2.f, -1.f, 0.f);
     DirectX::XMVECTOR xUpVec = DirectX::XMVectorSet(0.f, -1.f, 0.f, 0.f);
-    DirectX::XMVECTOR xLookAt = DirectX::XMVectorSet(0.f, 0.f, 1.f, 0.f);
+    DirectX::XMVECTOR xLookAt = DirectX::XMVectorSet(WindowManager::GetScreenWidth()/2.f, WindowManager::GetScreenHeight()/2.f, 1.f, 0.f);
 
     // Create the view matrix from the three updated vectors.
     xViewMatrix = DirectX::XMMatrixLookAtRH(xPos, xLookAt, xUpVec);

@@ -5,10 +5,6 @@
 #include "InputSystem.h"
 #include "Core/Assert.h"
 
-// Globals...
-static const u_int iMOUSEPOSX = 400;
-static const u_int iMOUSEPOSY = 300;
-
 // Statics...
 InputSystem* Singleton<InputSystem>::s_pxThis = nullptr;
 
@@ -173,8 +169,8 @@ InputSystem::Update()
     GetCursorPos(&xPoint);
     ScreenToClient(WindowManager::GetHandle(), &xPoint);
 
-    int iMouseMoveX = xPoint.x - iMOUSEPOSX;
-    int iMouseMoveY = xPoint.y - iMOUSEPOSY;
+    int iMouseMoveX = xPoint.x - WindowManager::GetScreenWidth()/2;
+    int iMouseMoveY = xPoint.y - WindowManager::GetScreenHeight()/2;
     std::list<MouseMoveCallbackRegister>::const_iterator xIter;
     for (xIter = s_pxThis->m_lxMouseMoveCallbacks.begin(); xIter != s_pxThis->m_lxMouseMoveCallbacks.end(); ++xIter) {
         MouseMoveCallbackRegister xReg = *xIter;
@@ -183,7 +179,7 @@ InputSystem::Update()
 
     // Reset the cursor
     if (s_pxThis->m_bLockMouse) {
-        xPoint = { iMOUSEPOSX, iMOUSEPOSY };
+        xPoint = { (int)WindowManager::GetScreenWidth()/2, (int)WindowManager::GetScreenHeight()/2 };
         ClientToScreen(WindowManager::GetHandle(), &xPoint);
         SetCursorPos(xPoint.x, xPoint.y);
     }
@@ -193,7 +189,7 @@ bool
 InputSystem::Init()
 {
     SetCapture(WindowManager::GetHandle());
-    POINT xPoint = { iMOUSEPOSX, iMOUSEPOSY };
+    POINT xPoint = { (int)WindowManager::GetScreenWidth()/2, (int)WindowManager::GetScreenHeight()/2 };
     ScreenToClient(WindowManager::GetHandle(), &xPoint);
     SetCursorPos(xPoint.x, xPoint.y);
     return true;

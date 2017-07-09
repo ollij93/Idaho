@@ -4,6 +4,9 @@
 #include <list>
 #include "ReactPhysics3D/reactphysics3d.h"
 
+// Includes...
+#include "Core/Types.h"
+
 // Forward Declarations...
 class Camera;
 class Entity;
@@ -12,8 +15,9 @@ class Renderable;
 
 class Scene {
 public:
-    Scene()
-    : m_xWorld()
+    Scene(u_int uID)
+    : m_uID(uID)
+    , m_xWorld()
     , m_lpxEntityList()
     , m_lpxRenderableList()
     , m_pxActiveCamera(nullptr)
@@ -37,14 +41,20 @@ public:
     void SetTrapCursor(bool bSet) { m_bTrapCursor = bSet; }
 
     // Statics...
+    static bool LoadFromFile(FILE* pxFile);
+    static void SwitchToScene(u_int uID) { SetActive(s_impxScenes[uID]); }
+
+    // Static Getters & Setters...
     static Scene* GetActive() { return s_pxActive; }
-    static void SetActive(Scene* pxScene);
 
 protected:
     void Activate();
     void Deactivate();
 
+    static void SetActive(Scene* pxScene);
+
 private:
+    u_int m_uID;
     rp3d::CollisionWorld m_xWorld;
     std::list<Entity*> m_lpxEntityList;
     std::list<Renderable*> m_lpxRenderableList;
@@ -54,5 +64,6 @@ private:
 
     // Statics...
     static Scene* s_pxActive;
+    static std::unordered_map<int, Scene*> s_impxScenes;
 };
 

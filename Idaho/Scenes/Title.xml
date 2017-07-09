@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Scene id="0" name="Default" trapMouse="0">
+    <Camera active="1">
+    </Camera>
+    <Light active="1">
+    </Light>
+    <Image texture="Textures/Background.dds">
+        <Size x="1067" y="600"/>
+    </Image>
+    <Text font="Default">
+        <String>This is the Title Screen</String>
+        <Position x="50" y="50"/>
+    </Text>
+</Scene>
