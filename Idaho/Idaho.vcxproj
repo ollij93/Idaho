@@ -206,6 +206,7 @@
     <ClCompile Include="..\ReactPhysics3D\mathematics\Vector3.cpp" />
     <ClCompile Include="..\ReactPhysics3D\memory\MemoryAllocator.cpp" />
     <ClCompile Include="..\TinyXML\tinyxml2.cpp" />
+    <ClCompile Include="Commands.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="Graphics\2D\Font.cpp" />
     <ClCompile Include="Graphics\2D\Renderable2D.cpp" />
@@ -228,6 +229,7 @@
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Entity\ObjectController.cpp" />
     <ClCompile Include="Objects\Entity\Entity.cpp" />
+    <ClCompile Include="Objects\Entity\SpinningObject.cpp" />
     <ClCompile Include="Objects\Object.cpp" />
     <ClCompile Include="Objects\Light.cpp" />
     <ClCompile Include="Objects\StaticObject.cpp" />
@@ -333,6 +335,7 @@
     <ClInclude Include="..\ReactPhysics3D\memory\Stack.h" />
     <ClInclude Include="..\ReactPhysics3D\reactphysics3d.h" />
     <ClInclude Include="..\TinyXML\tinyxml2.h" />
+    <ClInclude Include="Commands.h" />
     <ClInclude Include="Core\Assert.h" />
     <ClInclude Include="Core\Math.h" />
     <ClInclude Include="Core\Types.h" />
@@ -358,6 +361,7 @@
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Entity\ObjectController.h" />
     <ClInclude Include="Objects\Entity\Entity.h" />
+    <ClInclude Include="Objects\Entity\SpinningObject.h" />
     <ClInclude Include="Objects\Light.h" />
     <ClInclude Include="Objects\Object.h" />
     <ClInclude Include="Objects\StaticObject.h" />
