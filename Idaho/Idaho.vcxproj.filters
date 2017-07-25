@@ -412,6 +412,8 @@
     <ClCompile Include="UI\TextInput.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Entity\SpinningObject.cpp" />
+    <ClCompile Include="Commands.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h" />
@@ -790,6 +792,8 @@
     <ClInclude Include="UI\Object2D.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\Entity\SpinningObject.h" />
+    <ClInclude Include="Commands.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Graphics\Shader\PS\ColorPixelShader.hlsl">
