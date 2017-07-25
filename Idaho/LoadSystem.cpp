@@ -10,6 +10,7 @@
 #include "Objects/Light.h"
 #include "Objects/StaticObject.h"
 #include "UI/GUIElement.h"
+#include "UI/TextInput.h"
 
 // Statics...
 LoadSystem* Singleton<LoadSystem>::s_pxThis = nullptr;
@@ -223,12 +224,24 @@ LoadSystem::CreateFromElement<Scene>(tinyxml2::XMLElement* pxElement)
         pxGUIElement = pxGUIElement->NextSiblingElement("GUIElement")) {
         AddToSceneFromElement<GUIElement>(pxGUIElement, pxNewScene);
     }
+    for (tinyxml2::XMLElement* pxInputElement = pxElement->FirstChildElement("TextInput");
+        pxInputElement;
+        pxInputElement = pxInputElement->NextSiblingElement("TextInput")) {
+        AddToSceneFromElement<TextInput>(pxInputElement, pxNewScene);
+    }
 
     // Load Static Objects
     for (tinyxml2::XMLElement* pxObjectElement = pxElement->FirstChildElement("StaticObject");
         pxObjectElement;
         pxObjectElement = pxObjectElement->NextSiblingElement("StaticObject")) {
         AddToSceneFromElement<StaticObject>(pxObjectElement, pxNewScene);
+    }
+
+    // Load Spinning Objects
+    for (tinyxml2::XMLElement* pxObjectElement = pxElement->FirstChildElement("SpinningObject");
+        pxObjectElement;
+        pxObjectElement = pxObjectElement->NextSiblingElement("SpinningObject")) {
+        AddToSceneFromElement<SpinningObject>(pxObjectElement, pxNewScene);
     }
 
     return pxNewScene;

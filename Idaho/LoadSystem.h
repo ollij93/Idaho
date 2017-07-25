@@ -17,6 +17,7 @@ class GUIElement;
 class Light;
 class Renderable2D;
 class Scene;
+class SpinningObject;
 class StaticObject;
 class Text;
 
@@ -46,5 +47,6 @@ template<> static Camera* LoadSystem::AddToSceneFromElement<Camera>(tinyxml2::XM
 template<> static GUIElement* LoadSystem::AddToSceneFromElement<GUIElement>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
 template<> static Light* LoadSystem::AddToSceneFromElement<Light>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
 template<> static Renderable2D* LoadSystem::AddToSceneFromElement<Renderable2D>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
+template<> static SpinningObject* LoadSystem::AddToSceneFromElement<SpinningObject>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
 template<> static StaticObject* LoadSystem::AddToSceneFromElement<StaticObject>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
 template<> static Text* LoadSystem::AddToSceneFromElement<Text>(tinyxml2::XMLElement* pxElement, Scene* pxScene);
