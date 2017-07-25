@@ -25,23 +25,14 @@ LoadSystem::AddToSceneFromElement<Text>(tinyxml2::XMLElement* pxElement, Scene* 
     return pxText;
 }
 
-Text::Text(Scene& xScene, const char* pszString, Hash uFontHash)
+Text::Text(Scene& xScene, std::string sString, Hash uFontHash)
+    : PARENT()
+    , m_uFontHash(uFontHash)
+    , m_sString()
+    , m_lpxRenderables()
+    , m_pxScene(&xScene)
 {
-    const Font* pxFont = Font::GetFontByHash(uFontHash);
-    if (pxFont) {
-        u_int uWidthPos = 0;
-        const char* pcChar = pszString;
-        while (*pcChar) {
-            Renderable2D* pxRenderable = pxFont->CreateRenderableForCharacter(*pcChar, xScene);
-            if (pxRenderable) {
-                pxRenderable->SetPosition(Vector2<int>(uWidthPos, 0));
-                uWidthPos += pxRenderable->GetWidth() + 1;
-                m_lpxRenderables.push_back(pxRenderable);
-            }
-
-            pcChar++;
-        }
-    }
+    SetString(sString);
 }
 
 Text::~Text()
@@ -81,4 +72,38 @@ Text::SetPosition(Vector2<int> xPos, bool bCentred /* = false */)
             uCurrWidth += pxRenderable->GetWidth() + 1;
         }
     }
+}
+
+void
+Text::SetString(std::string sString)
+{
+    // Clear existing string
+    std::list<Renderable2D*>::const_iterator xIter;
+    for (xIter = m_lpxRenderables.begin();
+        xIter != m_lpxRenderables.end();
+        ++xIter) {
+        Renderable2D* pxRenderable = *xIter;
+        if (pxRenderable) {
+            pxRenderable->Shutdown();
+            delete pxRenderable;
+            pxRenderable = nullptr;
+        }
+    }
+    m_lpxRenderables.clear();
+
+    // Fill new string
+    const Font* pxFont = Font::GetFontByHash(m_uFontHash);
+    if (pxFont) {
+        u_int uWidthPos = 0;
+        for (u_int u = 0; u < sString.length(); u++) {
+            Renderable2D* pxRenderable = pxFont->CreateRenderableForCharacter(sString[u], *m_pxScene);
+            if (pxRenderable) {
+                pxRenderable->SetPosition(Vector2<int>(uWidthPos, 0));
+                uWidthPos += pxRenderable->GetWidth() + 1;
+                m_lpxRenderables.push_back(pxRenderable);
+            }
+        }
+    }
+    m_sString = sString;
+    SetPosition(GetPosition());
 }
