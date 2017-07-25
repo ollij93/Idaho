@@ -161,6 +161,10 @@ public:
     static void RegisterMouseClickCallback(MouseClickCallbackFunction pvfnFunc, void* pContext, MouseMessageType eMessage);
     static void UnRegisterMouseClickCallback(MouseClickCallbackFunction pvfnFunc, void* pContext, MouseMessageType eMessage);
 
+    typedef void(*TextCallbackFunction)(void*, char);
+    static void RegisterTextCallback(TextCallbackFunction pvfnFunc, void* pContext);
+    static void UnRegisterTextCallback(TextCallbackFunction pvfnFunc, void* pContext);
+
     // Statics...
     static LRESULT CALLBACK HandleWindowsMessage(HWND gHWND, UINT uMsg, WPARAM wParam, LPARAM lParam);
     static void Update();
@@ -218,6 +222,17 @@ private:
         }
     };
     std::list<MouseClickCallbackRegister> m_lxMouseClickCallbacks;
+
+    struct TextCallbackRegister {
+        TextCallbackFunction m_pvfnFunc;
+        void* m_pContext;
+
+        bool operator==(TextCallbackRegister xOther)
+        {
+            return (m_pvfnFunc == xOther.m_pvfnFunc && m_pContext == xOther.m_pContext);
+        }
+    };
+    std::list<TextCallbackRegister> m_lxTextCallbacks;
 
     bool m_bLockMouse;
 

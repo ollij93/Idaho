@@ -13,11 +13,11 @@ public:
     GUIElement()
         : m_lpxChildren()
     {}
-    ~GUIElement();
+    ~GUIElement() {}
 
     virtual void SetPosition(Vector2<int> xPos, bool bCentred = false) override;
 
-private:
+protected:
     Vector2<int> m_xPos;
     struct GUIChild {
         Object2D* m_pxObject;
@@ -25,6 +25,7 @@ private:
     };
     std::list<GUIChild*> m_lpxChildren;
 
+private:
     typedef Object2D PARENT;
     friend LoadSystem;
 };

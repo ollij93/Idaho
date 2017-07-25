@@ -1,6 +1,7 @@
 // Includes...
 #include "GUIElement.h"
 #include "Scene.h"
+#include "TextInput.h"
 #include "Graphics/2D/Renderable2D.h"
 #include "Graphics/2D/Text.h"
 
@@ -51,6 +52,27 @@ LoadSystem::AddToSceneFromElement<GUIElement>(tinyxml2::XMLElement* pxElement, S
 
             GUIElement::GUIChild* pxChild = new GUIElement::GUIChild;
             pxChild->m_pxObject = pxText;
+            pxChild->m_xOffset = xOffset;
+
+            pxGUI->m_lpxChildren.push_back(pxChild);
+        }
+    }
+
+    // Load Text Input
+    for (tinyxml2::XMLElement* pxTextInputElement = pxElement->FirstChildElement("TextInput");
+        pxTextInputElement;
+        pxTextInputElement = pxTextInputElement->NextSiblingElement("TextInput")) {
+        TextInput* pxTextInput = AddToSceneFromElement<TextInput>(pxTextInputElement, pxScene);
+        if (pxTextInput) {
+            Vector2<int> xOffset = Vector2<int>::ZeroVector();
+            pxOffsetElement = pxTextInputElement->FirstChildElement("Offset");
+            if (pxOffsetElement) {
+                xOffset = GetFromElement<Vector2<int>>(pxOffsetElement);
+            }
+            pxTextInput->SetPosition(xOffset);
+
+            GUIElement::GUIChild* pxChild = new GUIElement::GUIChild;
+            pxChild->m_pxObject = pxTextInput;
             pxChild->m_xOffset = xOffset;
 
             pxGUI->m_lpxChildren.push_back(pxChild);
