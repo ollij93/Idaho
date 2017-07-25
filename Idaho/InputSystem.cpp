@@ -93,6 +93,32 @@ InputSystem::UnRegisterMouseClickCallback(MouseClickCallbackFunction pvfnFunc, v
 }
 
 /*
+ * RegisterTextCallback : Register a function callback for text input event messages
+ */
+void
+InputSystem::RegisterTextCallback(TextCallbackFunction pvfnFunc, void* pContext)
+{
+    ASSERT(s_pxThis, "Attempting to register text callbacks before the input system is created");
+    TextCallbackRegister xReg;
+    xReg.m_pvfnFunc = pvfnFunc;
+    xReg.m_pContext = pContext;
+    s_pxThis->m_lxTextCallbacks.push_back(xReg);
+}
+
+/*
+ * UnRegisterTextCallback : Remove a function callback for text input event messages
+ */
+void
+InputSystem::UnRegisterTextCallback(TextCallbackFunction pvfnFunc, void* pContext)
+{
+    ASSERT(s_pxThis, "Attempting to unregister text callbacks before the input system is created");
+    TextCallbackRegister xReg;
+    xReg.m_pvfnFunc = pvfnFunc;
+    xReg.m_pContext = pContext;
+    s_pxThis->m_lxTextCallbacks.remove(xReg);
+}
+
+/*
  * HandleWindowsMessage : Callback function for Windows messages
  */
 LRESULT CALLBACK
@@ -114,6 +140,9 @@ InputSystem::HandleWindowsMessage(HWND gHWND, UINT uMsg, WPARAM wParam, LPARAM l
         case WM_RBUTTONDBLCLK:
         {
             // Handle mouse click
+            POINT xPoint;
+            GetCursorPos(&xPoint);
+            ScreenToClient(gHWND, &xPoint);
             std::list<MouseClickCallbackRegister>::const_iterator xIter;
             for (xIter = s_pxThis->m_lxMouseClickCallbacks.begin(); xIter != s_pxThis->m_lxMouseClickCallbacks.end(); ++xIter) {
                 MouseClickCallbackRegister xReg = *xIter;
@@ -124,9 +153,6 @@ InputSystem::HandleWindowsMessage(HWND gHWND, UINT uMsg, WPARAM wParam, LPARAM l
                     || (uMsg == WM_RBUTTONUP && xReg.m_eMessage == RBUTTON_UP)
                     || (uMsg == WM_LBUTTONDBLCLK && xReg.m_eMessage == LBUTTON_DBLCLICK)
                     || (uMsg == WM_RBUTTONDBLCLK && xReg.m_eMessage == RBUTTON_DBLCLICK)) {
-                    POINT xPoint;
-                    GetCursorPos(&xPoint);
-                    ScreenToClient(gHWND, &xPoint);
                     xReg.m_pvfnFunc(xReg.m_pContext, TranslateMouseClickMessageType(uMsg), xPoint.x, xPoint.y);
                 }
             }
@@ -152,6 +178,15 @@ InputSystem::HandleWindowsMessage(HWND gHWND, UINT uMsg, WPARAM wParam, LPARAM l
                 }
             }
             break;
+        }
+        case WM_CHAR:
+        {
+            // Handle general text input
+            std::list<TextCallbackRegister>::const_iterator xIter;
+            for (xIter = s_pxThis->m_lxTextCallbacks.begin(); xIter != s_pxThis->m_lxTextCallbacks.end(); ++xIter) {
+                TextCallbackRegister xReg = *xIter;
+                xReg.m_pvfnFunc(xReg.m_pContext, (char)wParam);
+            }
         }
         // Default to let windows handle the message
         default:
