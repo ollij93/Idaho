@@ -14,7 +14,6 @@ public:
         , m_fTextureRight(fTextureRight)
         , m_fTextureTop(fTextureTop)
         , m_fTextureBottom(fTextureBottom)
-        , m_xPos()
     {}
     ~Renderable2D() {}
 
@@ -35,8 +34,6 @@ private:
     float m_fTextureRight;
     float m_fTextureTop;
     float m_fTextureBottom;
-
-    Vector2<int> m_xPos;
 
     typedef Renderable PARENT;
 };
