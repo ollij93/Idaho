@@ -32,6 +32,7 @@ public:
     void operator +=(const Vector2<T>& xVector) { x += xVector.x; y += xVector.y; }
     Vector2<T> operator -(const Vector2<T>& xVector) const { return Vector2<T>(x - xVector.x, y - xVector.y); }
     void operator -=(const Vector2<T>& xVector) { x -= xVector.x; y -= xVector.y; }
+    Vector2<T> operator /(int i) const { return Vector2<T>(x / i, y / i); }
 
     T x;
     T y;

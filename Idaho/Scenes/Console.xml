@@ -1,14 +1,22 @@
 <?xml version="1.0"?>
 <Scene id="2" name="Default" trapMouse="0">
-    <Camera active="1">
-    </Camera>
-    <Light active="1">
-    </Light>
+  <Camera active="1">
+  </Camera>
+  <Light active="1">
+  </Light>
+  <GUIElement>
     <Image texture="Textures/Background.dds">
         <Size x="1067" y="600"/>
     </Image>
     <Text font="Default">
         <String>This is the Console Screen</String>
-        <Position x="50" y="50"/>
+        <Offset x="50" y="50"/>
     </Text>
+  </GUIElement>
+  <TextInput>
+    <Image texture="Textures/Default_Yellow.dds">
+      <Offset x="10" y="2"/>
+      <Size x="800" y="20"/>
+    </Image>
+  </TextInput>
 </Scene>

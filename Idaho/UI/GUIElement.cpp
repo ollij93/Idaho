@@ -109,17 +109,37 @@ LoadSystem::AddToSceneFromElement<GUIElement>(tinyxml2::XMLElement* pxElement, S
 }
 
 /*
+ * OnClick : Check which element was clicked and run its callback if it has one
+ */
+void
+GUIElement::OnClick(void* pContext, MouseMessageType eMsg, int iClickX, int iClickY)
+{
+    GUIElement* pxInstance = static_cast<GUIElement*>(pContext);
+    if (pxInstance) {
+        if (iClickX >= pxInstance->GetPosition().x
+            && iClickX < pxInstance->GetDimensions().x + pxInstance->GetPosition().x
+            && iClickY >= pxInstance->GetPosition().y
+            && iClickY < pxInstance->GetDimensions().y + pxInstance->GetPosition().y) {
+            // Click was on the element so run its callback
+            if (pxInstance->m_vfnOnClick) {
+                pxInstance->m_vfnOnClick(pxInstance->m_iClickData);
+            }
+        }
+    }
+}
+
+/*
  * Set the position of the gui element and all its child objects
  */
 void
 GUIElement::SetPosition(Vector2<int> xPos, bool bCentred /*= false*/)
 {
-    PARENT::SetPosition(xPos);
+    PARENT::SetPosition(xPos, bCentred);
     std::list<GUIChild*>::const_iterator xIter;
     for (xIter = m_lpxChildren.begin();
         xIter != m_lpxChildren.end();
         ++xIter) {
         GUIChild* pxChild = *xIter;
-        pxChild->m_pxObject->SetPosition(xPos + pxChild->m_xOffset);
+        pxChild->m_pxObject->SetPosition(GetPosition() + pxChild->m_xOffset);
     }
 }

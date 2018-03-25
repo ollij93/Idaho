@@ -7,17 +7,24 @@
 // Forward Declarations...
 class Text;
 class Renderable2D;
+enum MouseMessageType;
 
 class GUIElement : public Object2D {
 public:
     GUIElement()
-        : m_lpxChildren()
+        : m_vfnOnClick(nullptr)
+        , m_iClickData(0)
+        , m_lpxChildren()
     {}
     ~GUIElement() {}
+
+    static void OnClick(void* pContext, MouseMessageType eMsg, int iClickX, int iClickY);
 
     virtual void SetPosition(Vector2<int> xPos, bool bCentred = false) override;
 
 protected:
+    void(*m_vfnOnClick)(int);
+    int m_iClickData;
     Vector2<int> m_xPos;
     struct GUIChild {
         Object2D* m_pxObject;

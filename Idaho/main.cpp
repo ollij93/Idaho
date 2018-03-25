@@ -2,14 +2,21 @@
 #include "Core/Assert.h"
 #include "GameSystem.h"
 
-#include "LoadSystem.h"
+#include "InputSystem.h"
 #include "Scene.h"
-#include "Graphics/2D/Renderable2D.h"
-#include "Graphics/2D/Text.h"
-#include "Objects/Camera.h"
-#include "Objects/Light.h"
-#include "Objects/StaticObject.h"
-#include "Objects/Entity/ObjectController.h"
+#include "Commands.h"
+
+void ToggleConsole(void*, KeyMapping, KeyMessageType)
+{
+    static bool bConsole = false;
+
+    if (bConsole) {
+        Scene::SwitchToScene(2);
+    } else {
+        Scene::SwitchToScene(1);
+    }
+    bConsole = !bConsole;
+}
 
 int WINAPI
 WinMain(HINSTANCE hInstance,
@@ -30,6 +37,11 @@ WinMain(HINSTANCE hInstance,
     // Create the game system
     bResult = GameSystem::Create();
     ASSERT(bResult, "Failed to create GameSystem");
+
+    // Register the console toggle key
+    InputSystem::RegisterKeyCallback(ToggleConsole, nullptr, BACKTICK_KEY, UP_MSG);
+
+    cmd::RegisterCommand<u_int>(GetHash("Scene.SwitchTo"), Scene::SwitchToScene);
 
     ///////////////////////////////////
     // M A I N L O O P
