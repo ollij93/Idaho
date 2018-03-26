@@ -66,7 +66,7 @@ GameSystem::Init()
     bResult = LoadSystem::ForFileInDir("Scenes", "xml", Scene::LoadFromFile);
     ASSERT(bResult, "Failed to create the graphics system");
     if (!bResult) { return false; }
-    Scene::SwitchToScene(0);
+    Scene::SwitchToScene(1);
 
     // Initialize the update time
     m_lUpdateTime = clock();

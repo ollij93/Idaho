@@ -20,7 +20,7 @@
     <StaticObject spec="Block">
         <Position x="0.0" y="0.0" z="0.0"/>
     </StaticObject>
-    <StaticObject spec="Block">
+    <SpinningObject spec="Block" rate="1.0">
         <Position x="0.0" y="-1.0" z="0.0"/>
-    </StaticObject>
+    </SpinningObject>
 </Scene>
