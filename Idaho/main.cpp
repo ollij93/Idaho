@@ -4,6 +4,7 @@
 
 #include "LoadSystem.h"
 #include "Scene.h"
+#include "WindowManager.h"
 #include "Graphics/2D/Renderable2D.h"
 #include "Graphics/2D/Text.h"
 #include "Objects/Camera.h"

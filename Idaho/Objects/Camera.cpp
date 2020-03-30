@@ -1,5 +1,6 @@
 // Includes...
 #include "Camera.h"
+#include "WindowManager.h"
 #include "Core/Types.h"
 
 void

@@ -3,6 +3,7 @@
 
 // Includes...
 #include "InputSystem.h"
+#include "WindowManager.h"
 #include "Core/Assert.h"
 
 // Statics...

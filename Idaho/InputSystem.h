@@ -193,7 +193,7 @@ private:
         KeyMapping m_eKey;
         KeyMessageType m_eMessage;
 
-        bool operator==(KeyCallbackRegister xOther)
+        bool operator==(const KeyCallbackRegister& xOther) const
         {
             return (m_pvfnFunc == xOther.m_pvfnFunc && m_pContext == xOther.m_pContext && m_eKey == xOther.m_eKey && m_eMessage == xOther.m_eMessage);
         }
@@ -204,7 +204,7 @@ private:
         MouseMoveCallbackFunction m_pvfnFunc;
         void* m_pContext;
 
-        bool operator==(MouseMoveCallbackRegister xOther)
+        bool operator==(const MouseMoveCallbackRegister& xOther) const
         {
             return (m_pvfnFunc == xOther.m_pvfnFunc && m_pContext == xOther.m_pContext);
         }
@@ -216,7 +216,7 @@ private:
         void* m_pContext;
         MouseMessageType m_eMessage;
 
-        bool operator==(MouseClickCallbackRegister xOther)
+        bool operator==(const MouseClickCallbackRegister& xOther) const
         {
             return (m_pvfnFunc == xOther.m_pvfnFunc && m_pContext == xOther.m_pContext && m_eMessage == xOther.m_eMessage);
         }
@@ -227,7 +227,7 @@ private:
         TextCallbackFunction m_pvfnFunc;
         void* m_pContext;
 
-        bool operator==(TextCallbackRegister xOther)
+        bool operator==(const TextCallbackRegister& xOther) const
         {
             return (m_pvfnFunc == xOther.m_pvfnFunc && m_pContext == xOther.m_pContext);
         }
